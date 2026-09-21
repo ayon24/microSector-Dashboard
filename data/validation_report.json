@@ -3,22 +3,5 @@
   "symbols_expected": 344,
   "symbols_on_latest_date": 344,
   "errors": [],
-  "warnings": [
-    {
-      "check": "big_moves",
-      "threshold": 0.2,
-      "moves": [
-        {
-          "symbol": "IIFLCAPS",
-          "date": "2021-02-24",
-          "return": 0.2
-        },
-        {
-          "symbol": "REPCOHOME",
-          "date": "2021-02-18",
-          "return": 0.2
-        }
-      ]
-    }
-  ]
+  "warnings": []
 }
