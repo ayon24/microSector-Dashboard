@@ -22,7 +22,7 @@ HISTORY_YEARS = 6              # 5 years shown + 1 year warm-up for 200-DMA / li
 # Index methodology
 MIN_MEDIAN_TRADED_VALUE = 1e7  # ₹1 crore, 20-day median
 LIQUIDITY_WINDOW = 20
-MIN_CONSTITUENTS = 5
+MIN_CONSTITUENTS = 3
 REBALANCE_MONTHS = (1, 4, 7, 10)
 BASE_VALUE = 100.0
 

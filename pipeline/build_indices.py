@@ -6,8 +6,8 @@ Methodology
   - Eligible at a rebalance: has a close that day, and 20-day median traded value
     (close x volume, measured up to the previous session) of at least ₹1 crore.
     New listings therefore join at the first rebalance after ~20 sessions of trading.
-  - A sector's index starts at the first rebalance with 5+ eligible stocks (base 100). If it later
-    drops below 5 it continues with whatever is eligible, and the count is reported.
+  - A sector's index starts at the first rebalance with 3+ eligible stocks (base 100). If it later
+    drops below 3 it continues with whatever is eligible, and the count is reported.
   - A stock with no close on a day is left out of that day's average (its weight is held until
     it trades again; its return is then measured from its last close).
 

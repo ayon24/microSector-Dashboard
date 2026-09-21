@@ -12,3 +12,6 @@ STAR,2024-12-06,adjust,0.4596,Demerger of OneSource Specialty Pharma (close rati
 SKFINDIA,2025-10-15,adjust,0.4525,Demerger of SKF India (Industrial) (close ratio)
 DIACABS,2023-09-18,drop_before,,Relisted after insolvency resolution; earlier prices are stale pre-reduction quotes
 THYROCARE,2020-11-14,drop_day,,Bad print on Diwali muhurat session (942.5 vs ~310)
+CGCL,2024-01-01,adjust,0.25,Stock split 1:2 + bonus 1:1 not adjusted by Yahoo
+MOTILALOFS,2024-01-01,adjust,0.25,Bonus 3:1 not adjusted by Yahoo
+DHANBANK,2024-12-18,adjust,0.7741,Rights issue ex-date (close ratio; volume normal) - verify ratio
