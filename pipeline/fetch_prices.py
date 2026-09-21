@@ -127,8 +127,13 @@ def run(full: bool = False) -> pd.DataFrame:
     prices = prices.astype({"close": "float64", "volume": "float64", "symbol": "string", "source": "string"})
     prices = prices.sort_values(["symbol", "date"]).reset_index(drop=True)
 
-    PRICES_PARQUET.parent.mkdir(parents=True, exist_ok=True)
-    prices.to_parquet(PRICES_PARQUET, index=False, compression="zstd")
+    # Only rewrite when the data changed: different pyarrow versions encode identical data
+    # differently, which would otherwise produce a spurious commit on holidays.
+    if PRICES_PARQUET.exists() and pd.read_parquet(PRICES_PARQUET).equals(prices):
+        log.info("No price changes; %s left untouched", PRICES_PARQUET.name)
+    else:
+        PRICES_PARQUET.parent.mkdir(parents=True, exist_ok=True)
+        prices.to_parquet(PRICES_PARQUET, index=False, compression="zstd")
     log.info(
         "Saved %d rows, %d symbols, %s → %s",
         len(prices), prices["symbol"].nunique(), prices["date"].min().date(), prices["date"].max().date(),
