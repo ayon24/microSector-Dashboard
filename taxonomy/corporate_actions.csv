@@ -1,0 +1,14 @@
+# Manual price fixes for things Yahoo's adjusted data gets wrong. Applied before validation and index build.
+#   adjust      closes strictly before `date` are multiplied by `factor` (volumes divided). Use for
+#               unadjusted splits (factor = new/old face value) and demergers.
+#               Demergers use factor = ex-date close / prior close when the spun-off entity's value
+#               is not known, which treats the ex-date's own return as zero (a small approximation).
+#   drop_before all rows before `date` are discarded (e.g. relisting after insolvency / capital reduction)
+#   drop_day    the row on `date` is discarded (bad print)
+symbol,date,action,factor,note
+PARAS,2025-01-01,adjust,0.5,Stock split 1:2 (FV 10 -> 5) not adjusted by Yahoo
+SANOFI,2024-06-13,adjust,0.6466,Demerger of Sanofi Consumer Healthcare India (close ratio)
+STAR,2024-12-06,adjust,0.4596,Demerger of OneSource Specialty Pharma (close ratio)
+SKFINDIA,2025-10-15,adjust,0.4525,Demerger of SKF India (Industrial) (close ratio)
+DIACABS,2023-09-18,drop_before,,Relisted after insolvency resolution; earlier prices are stale pre-reduction quotes
+THYROCARE,2020-11-14,drop_day,,Bad print on Diwali muhurat session (942.5 vs ~310)

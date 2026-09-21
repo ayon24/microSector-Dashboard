@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+# derived each run from data/prices.parquet
+data/indices.parquet
+data/index_meta.json

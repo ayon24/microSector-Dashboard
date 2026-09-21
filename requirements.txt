@@ -1,0 +1,5 @@
+yfinance==1.2.0
+pandas>=2.2,<3
+numpy>=2.0,<3
+pyarrow>=17
+requests>=2.31

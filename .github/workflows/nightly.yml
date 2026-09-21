@@ -1,0 +1,68 @@
+name: Nightly update
+
+on:
+  schedule:
+    - cron: "0 14 * * 1-5"   # 19:30 IST, Mon–Fri
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["site/**", "taxonomy/**", "pipeline/**", ".github/workflows/nightly.yml"]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: nightly
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    outputs:
+      publish: ${{ steps.commit.outputs.changed == 'true' || github.event_name != 'schedule' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Fetch, validate, build, export
+        run: python -m pipeline.run_all
+
+      - name: Commit new data
+        id: commit
+        run: |
+          git add data/prices.parquet data/validation_report.json site/data
+          if git diff --cached --quiet; then
+            echo "No new prices (NSE holiday or data not yet published)."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "Data update $(python -c 'import json;print(json.load(open("site/data/summary.json"))["as_of"])')"
+            git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Upload site
+        if: steps.commit.outputs.changed == 'true' || github.event_name != 'schedule'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: update
+    if: needs.update.outputs.publish == 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

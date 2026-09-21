@@ -1,0 +1,178 @@
+symbol,name,broad_sector,micro_sector
+SUNPHARMA,Sun Pharmaceutical Industries,Pharma & Healthcare,Pharma - Export Generics
+DRREDDY,Dr. Reddy's Laboratories,Pharma & Healthcare,Pharma - Export Generics
+LUPIN,Lupin,Pharma & Healthcare,Pharma - Export Generics
+ZYDUSLIFE,Zydus Lifesciences,Pharma & Healthcare,Pharma - Export Generics
+AUROPHARMA,Aurobindo Pharma,Pharma & Healthcare,Pharma - Export Generics
+CIPLA,Cipla,Pharma & Healthcare,Pharma - Export Generics
+GLENMARK,Glenmark Pharmaceuticals,Pharma & Healthcare,Pharma - Export Generics
+NATCOPHARM,Natco Pharma,Pharma & Healthcare,Pharma - Export Generics
+APLLTD,Alembic Pharmaceuticals,Pharma & Healthcare,Pharma - Export Generics
+MARKSANS,Marksans Pharma,Pharma & Healthcare,Pharma - Export Generics
+CAPLIPOINT,Caplin Point Laboratories,Pharma & Healthcare,Pharma - Export Generics
+BIOCON,Biocon,Pharma & Healthcare,Pharma - Export Generics
+STAR,Strides Pharma Science,Pharma & Healthcare,Pharma - Export Generics
+MANKIND,Mankind Pharma,Pharma & Healthcare,Pharma - Domestic Formulations
+TORNTPHARM,Torrent Pharmaceuticals,Pharma & Healthcare,Pharma - Domestic Formulations
+ALKEM,Alkem Laboratories,Pharma & Healthcare,Pharma - Domestic Formulations
+ABBOTINDIA,Abbott India,Pharma & Healthcare,Pharma - Domestic Formulations
+ERIS,Eris Lifesciences,Pharma & Healthcare,Pharma - Domestic Formulations
+GLAXO,GlaxoSmithKline Pharmaceuticals,Pharma & Healthcare,Pharma - Domestic Formulations
+PFIZER,Pfizer,Pharma & Healthcare,Pharma - Domestic Formulations
+SANOFI,Sanofi India,Pharma & Healthcare,Pharma - Domestic Formulations
+AJANTPHARM,Ajanta Pharma,Pharma & Healthcare,Pharma - Domestic Formulations
+IPCALAB,Ipca Laboratories,Pharma & Healthcare,Pharma - Domestic Formulations
+INDOCO,Indoco Remedies,Pharma & Healthcare,Pharma - Domestic Formulations
+FDC,FDC,Pharma & Healthcare,Pharma - Domestic Formulations
+DIVISLAB,Divi's Laboratories,Pharma & Healthcare,CDMO & CRAMS
+SYNGENE,Syngene International,Pharma & Healthcare,CDMO & CRAMS
+LAURUSLABS,Laurus Labs,Pharma & Healthcare,CDMO & CRAMS
+PPLPHARMA,Piramal Pharma,Pharma & Healthcare,CDMO & CRAMS
+COHANCE,Cohance Lifesciences (formerly Suven Pharma),Pharma & Healthcare,CDMO & CRAMS
+NEULANDLAB,Neuland Laboratories,Pharma & Healthcare,CDMO & CRAMS
+JUBLPHARMA,Jubilant Pharmova,Pharma & Healthcare,CDMO & CRAMS
+SAILIFE,Sai Life Sciences,Pharma & Healthcare,CDMO & CRAMS
+GLAND,Gland Pharma,Pharma & Healthcare,CDMO & CRAMS
+AKUMS,Akums Drugs and Pharmaceuticals,Pharma & Healthcare,CDMO & CRAMS
+ONESOURCE,OneSource Specialty Pharma,Pharma & Healthcare,CDMO & CRAMS
+AARTIDRUGS,Aarti Drugs,Pharma & Healthcare,Active Pharma Ingredients
+SOLARA,Solara Active Pharma Sciences,Pharma & Healthcare,Active Pharma Ingredients
+IOLCP,IOL Chemicals and Pharmaceuticals,Pharma & Healthcare,Active Pharma Ingredients
+SMSPHARMA,SMS Pharmaceuticals,Pharma & Healthcare,Active Pharma Ingredients
+ALIVUS,Alivus Life Sciences,Pharma & Healthcare,Active Pharma Ingredients
+SHILPAMED,Shilpa Medicare,Pharma & Healthcare,Active Pharma Ingredients
+GRANULES,Granules India,Pharma & Healthcare,Active Pharma Ingredients
+SUPRIYA,Supriya Lifescience,Pharma & Healthcare,Active Pharma Ingredients
+CONCORDBIO,Concord Biotech,Pharma & Healthcare,Active Pharma Ingredients
+APOLLOHOSP,Apollo Hospitals Enterprise,Pharma & Healthcare,Hospitals
+MAXHEALTH,Max Healthcare Institute,Pharma & Healthcare,Hospitals
+FORTIS,Fortis Healthcare,Pharma & Healthcare,Hospitals
+NH,Narayana Hrudayalaya,Pharma & Healthcare,Hospitals
+MEDANTA,Global Health (Medanta),Pharma & Healthcare,Hospitals
+KIMS,Krishna Institute of Medical Sciences,Pharma & Healthcare,Hospitals
+RAINBOW,Rainbow Children's Medicare,Pharma & Healthcare,Hospitals
+ASTERDM,Aster DM Healthcare,Pharma & Healthcare,Hospitals
+YATHARTH,Yatharth Hospital & Trauma Care,Pharma & Healthcare,Hospitals
+JLHL,Jupiter Life Line Hospitals,Pharma & Healthcare,Hospitals
+SHALBY,Shalby,Pharma & Healthcare,Hospitals
+LALPATHLAB,Dr. Lal PathLabs,Pharma & Healthcare,Diagnostics
+METROPOLIS,Metropolis Healthcare,Pharma & Healthcare,Diagnostics
+THYROCARE,Thyrocare Technologies,Pharma & Healthcare,Diagnostics
+VIJAYA,Vijaya Diagnostic Centre,Pharma & Healthcare,Diagnostics
+KRSNAA,Krsnaa Diagnostics,Pharma & Healthcare,Diagnostics
+POLYMED,Poly Medicure,Pharma & Healthcare,Medical Devices & Consumables
+TARSONS,Tarsons Products,Pharma & Healthcare,Medical Devices & Consumables
+LAXMIDENTL,Laxmi Dental,Pharma & Healthcare,Medical Devices & Consumables
+HAL,Hindustan Aeronautics,Capital Goods,Defence
+BEL,Bharat Electronics,Capital Goods,Defence
+BDL,Bharat Dynamics,Capital Goods,Defence
+MAZDOCK,Mazagon Dock Shipbuilders,Capital Goods,Defence
+COCHINSHIP,Cochin Shipyard,Capital Goods,Defence
+GRSE,Garden Reach Shipbuilders & Engineers,Capital Goods,Defence
+DATAPATTNS,Data Patterns (India),Capital Goods,Defence
+BEML,BEML,Capital Goods,Defence
+SOLARINDS,Solar Industries India,Capital Goods,Defence
+ASTRAMICRO,Astra Microwave Products,Capital Goods,Defence
+PARAS,Paras Defence and Space Technologies,Capital Goods,Defence
+MIDHANI,Mishra Dhatu Nigam,Capital Goods,Defence
+ZENTEC,Zen Technologies,Capital Goods,Defence
+APOLLO,Apollo Micro Systems,Capital Goods,Defence
+MTARTECH,MTAR Technologies,Capital Goods,Defence
+ABB,ABB India,Capital Goods,Power T&D Equipment
+POWERINDIA,Hitachi Energy India,Capital Goods,Power T&D Equipment
+GVT&D,GE Vernova T&D India,Capital Goods,Power T&D Equipment
+CGPOWER,CG Power and Industrial Solutions,Capital Goods,Power T&D Equipment
+BHEL,Bharat Heavy Electricals,Capital Goods,Power T&D Equipment
+TARIL,Transformers and Rectifiers (India),Capital Goods,Power T&D Equipment
+VOLTAMP,Voltamp Transformers,Capital Goods,Power T&D Equipment
+SCHNEIDER,Schneider Electric Infrastructure,Capital Goods,Power T&D Equipment
+SIEMENS,Siemens,Capital Goods,Power T&D Equipment
+POLYCAB,Polycab India,Capital Goods,Cables & Wires
+KEI,KEI Industries,Capital Goods,Cables & Wires
+FINCABLES,Finolex Cables,Capital Goods,Cables & Wires
+RRKABEL,R R Kabel,Capital Goods,Cables & Wires
+UNIVCABLES,Universal Cables,Capital Goods,Cables & Wires
+PARACABLES,Paramount Communications,Capital Goods,Cables & Wires
+DIACABS,Diamond Power Infrastructure,Capital Goods,Cables & Wires
+CUMMINSIND,Cummins India,Capital Goods,Engines & Pumps
+KIRLOSENG,Kirloskar Oil Engines,Capital Goods,Engines & Pumps
+KIRLOSBROS,Kirloskar Brothers,Capital Goods,Engines & Pumps
+SHAKTIPUMP,Shakti Pumps (India),Capital Goods,Engines & Pumps
+WPIL,WPIL,Capital Goods,Engines & Pumps
+ROTO,Roto Pumps,Capital Goods,Engines & Pumps
+THERMAX,Thermax,Capital Goods,Industrial Machinery
+TRITURBINE,Triveni Turbine,Capital Goods,Industrial Machinery
+ELECON,Elecon Engineering,Capital Goods,Industrial Machinery
+PRAJIND,Praj Industries,Capital Goods,Industrial Machinery
+GMMPFAUDLR,GMM Pfaudler,Capital Goods,Industrial Machinery
+ISGEC,Isgec Heavy Engineering,Capital Goods,Industrial Machinery
+AIAENG,AIA Engineering,Capital Goods,Industrial Machinery
+TIMKEN,Timken India,Capital Goods,Bearings
+SKFINDIA,SKF India,Capital Goods,Bearings
+SCHAEFFLER,Schaeffler India,Capital Goods,Bearings
+NRBBEARING,NRB Bearings,Capital Goods,Bearings
+SUZLON,Suzlon Energy,Capital Goods,Renewable Energy Equipment
+INOXWIND,Inox Wind,Capital Goods,Renewable Energy Equipment
+WAAREEENER,Waaree Energies,Capital Goods,Renewable Energy Equipment
+PREMIERENE,Premier Energies,Capital Goods,Renewable Energy Equipment
+WEBELSOLAR,Websol Energy System,Capital Goods,Renewable Energy Equipment
+KPIGREEN,KPI Green Energy,Capital Goods,Renewable Energy Equipment
+DIXON,Dixon Technologies (India),Capital Goods,Electronics Manufacturing Services
+KAYNES,Kaynes Technology India,Capital Goods,Electronics Manufacturing Services
+SYRMA,Syrma SGS Technology,Capital Goods,Electronics Manufacturing Services
+AMBER,Amber Enterprises India,Capital Goods,Electronics Manufacturing Services
+AVALON,Avalon Technologies,Capital Goods,Electronics Manufacturing Services
+CYIENTDLM,Cyient DLM,Capital Goods,Electronics Manufacturing Services
+LT,Larsen & Toubro,Capital Goods,EPC & Infrastructure Contractors
+KEC,KEC International,Capital Goods,EPC & Infrastructure Contractors
+KPIL,Kalpataru Projects International,Capital Goods,EPC & Infrastructure Contractors
+TECHNOE,Techno Electric & Engineering,Capital Goods,EPC & Infrastructure Contractors
+ENGINERSIN,Engineers India,Capital Goods,EPC & Infrastructure Contractors
+NCC,NCC,Capital Goods,EPC & Infrastructure Contractors
+SRF,SRF,Chemicals,Fluorochemicals
+NAVINFLUOR,Navin Fluorine International,Chemicals,Fluorochemicals
+FLUOROCHEM,Gujarat Fluorochemicals,Chemicals,Fluorochemicals
+UPL,UPL,Chemicals,Agrochemicals
+PIIND,PI Industries,Chemicals,Agrochemicals
+BAYERCROP,Bayer CropScience,Chemicals,Agrochemicals
+SUMICHEM,Sumitomo Chemical India,Chemicals,Agrochemicals
+DHANUKA,Dhanuka Agritech,Chemicals,Agrochemicals
+RALLIS,Rallis India,Chemicals,Agrochemicals
+BHARATRAS,Bharat Rasayan,Chemicals,Agrochemicals
+SHARDACROP,Sharda Cropchem,Chemicals,Agrochemicals
+INSECTICID,Insecticides (India),Chemicals,Agrochemicals
+ALKYLAMINE,Alkyl Amines Chemicals,Chemicals,Amines & Intermediates
+BALAMINES,Balaji Amines,Chemicals,Amines & Intermediates
+AARTIIND,Aarti Industries,Chemicals,Amines & Intermediates
+DEEPAKNTR,Deepak Nitrite,Chemicals,Amines & Intermediates
+LXCHEM,Laxmi Organic Industries,Chemicals,Amines & Intermediates
+ACUTAAS,Acutaas Chemicals (formerly Ami Organics),Chemicals,Amines & Intermediates
+VINATIORGA,Vinati Organics,Chemicals,Specialty & Performance Chemicals
+CLEAN,Clean Science and Technology,Chemicals,Specialty & Performance Chemicals
+FINEORG,Fine Organic Industries,Chemicals,Specialty & Performance Chemicals
+GALAXYSURF,Galaxy Surfactants,Chemicals,Specialty & Performance Chemicals
+ROSSARI,Rossari Biotech,Chemicals,Specialty & Performance Chemicals
+NOCIL,NOCIL,Chemicals,Specialty & Performance Chemicals
+ATUL,Atul,Chemicals,Specialty & Performance Chemicals
+ANURAS,Anupam Rasayan India,Chemicals,Specialty & Performance Chemicals
+ASIANPAINT,Asian Paints,Chemicals,Paints & Coatings
+BERGEPAINT,Berger Paints India,Chemicals,Paints & Coatings
+KANSAINER,Kansai Nerolac Paints,Chemicals,Paints & Coatings
+JSWDULUX,JSW Dulux (formerly Akzo Nobel India),Chemicals,Paints & Coatings
+INDIGOPNTS,Indigo Paints,Chemicals,Paints & Coatings
+SHALPAINTS,Shalimar Paints,Chemicals,Paints & Coatings
+TATACHEM,Tata Chemicals,Chemicals,Chlor-Alkali & Soda Ash
+GHCL,GHCL,Chemicals,Chlor-Alkali & Soda Ash
+DCW,DCW,Chemicals,Chlor-Alkali & Soda Ash
+CHEMPLASTS,Chemplast Sanmar,Chemicals,Chlor-Alkali & Soda Ash
+GUJALKALI,Gujarat Alkalies and Chemicals,Chemicals,Chlor-Alkali & Soda Ash
+DCMSHRIRAM,DCM Shriram,Chemicals,Chlor-Alkali & Soda Ash
+CHAMBLFERT,Chambal Fertilisers and Chemicals,Chemicals,Fertilisers
+COROMANDEL,Coromandel International,Chemicals,Fertilisers
+FACT,Fertilisers and Chemicals Travancore,Chemicals,Fertilisers
+RCF,Rashtriya Chemicals and Fertilizers,Chemicals,Fertilisers
+GSFC,Gujarat State Fertilizers & Chemicals,Chemicals,Fertilisers
+GNFC,Gujarat Narmada Valley Fertilizers & Chemicals,Chemicals,Fertilisers
+DEEPAKFERT,Deepak Fertilisers and Petrochemicals,Chemicals,Fertilisers
+PARADEEP,Paradeep Phosphates,Chemicals,Fertilisers
+NFL,National Fertilizers,Chemicals,Fertilisers

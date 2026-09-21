@@ -1,0 +1,15 @@
+# Single-day moves over 20% that were checked and are genuine (not a data error).
+# validate.py stops flagging a move once it is listed here.
+symbol,date,note
+AVALON,2026-02-03,Upper circuit
+BHEL,2024-06-04,General election results day sell-off in PSUs
+DEEPAKFERT,2021-06-10,Upper circuit
+KAYNES,2026-05-14,Post-results fall
+KEI,2025-02-27,Sector sell-off on UltraTech entering cables & wires
+KIRLOSENG,2026-06-22,Upper circuit
+MARKSANS,2021-06-11,Upper circuit
+NEULANDLAB,2023-05-11,Upper circuit after results
+PARACABLES,2026-02-03,Upper circuit
+POLYCAB,2024-01-11,Income-tax search disclosure
+SUPRIYA,2026-05-29,Upper circuit
+THYROCARE,2020-10-07,Upper circuit
