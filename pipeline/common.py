@@ -32,6 +32,8 @@ STALE_DAYS = 5
 
 IST = timezone(timedelta(hours=5, minutes=30))
 MARKET_DATA_FINAL_IST = (16, 30)  # a bar for "today" is treated as final only after this time
+PROVISIONAL = "yahoo_provisional"  # source label for an intraday (pre-close) bar
+FETCH_META_JSON = ROOT / "data" / "fetch_meta.json"
 
 
 def now_ist() -> datetime:

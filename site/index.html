@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Micro-Sector Dashboard</title>
-  <meta name="description" content="Equal-weight micro-sector indices for Indian equities, compared with the NIFTY 500. Updated after every NSE session.">
+  <meta name="description" content="Equal-weight micro-sector indices for Indian equities, compared with the NIFTY 500, with an EMA scanner.">
   <link rel="stylesheet" href="style.css">
   <script>
     try { const t = localStorage.getItem("msd-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
@@ -13,72 +13,132 @@
   <script src="app.js" defer></script>
 </head>
 <body>
-  <header class="top">
-    <div class="brand">
-      <h1>Micro-Sector Dashboard</h1>
-      <p class="sub" id="asof">Loading…</p>
-    </div>
-    <button class="icon-btn" id="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+<div class="app">
+  <aside class="sidebar" aria-label="Main navigation">
+    <div class="brand">Micro-Sector<br>Dashboard</div>
+    <nav class="nav">
+      <a href="#/sectors" data-page="sectors">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M3 3h8v8H3V3Zm2 2v4h4V5H5Zm8-2h8v8h-8V3Zm2 2v4h4V5h-4ZM3 13h8v8H3v-8Zm2 2v4h4v-4H5Zm8-2h8v8h-8v-8Zm2 2v4h4v-4h-4Z"/></svg>
+        <span>Micro Sector Scanner</span>
+      </a>
+      <a href="#/ema" data-page="ema">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M3 17.6 9 11l4 4 6.3-7.1L21 9.3 13 18.4l-4-4-4.6 5-1.4-1.8ZM3 4h2v12.2l-2 2.2V4Z"/></svg>
+        <span>EMA Scanner</span>
+      </a>
+    </nav>
+    <button class="icon-btn theme-btn" id="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
       <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z"/></svg>
     </button>
-  </header>
+  </aside>
 
-  <section class="controls" aria-label="Filters">
-    <div class="seg" role="group" aria-label="View" id="view-seg">
-      <button type="button" data-view="grid">Grid</button>
-      <button type="button" data-view="table">Table</button>
-    </div>
-    <div class="seg" role="group" aria-label="Timeframe" id="tf-seg"></div>
-    <div class="seg" role="group" aria-label="Scale" id="scale-seg">
-      <button type="button" data-scale="linear">Linear</button>
-      <button type="button" data-scale="log">Log</button>
-    </div>
-    <input type="search" id="search" placeholder="Search micro sector…" aria-label="Search micro sector">
-    <select id="broad" aria-label="Broad sector"><option value="">All sectors</option></select>
-    <select id="show" aria-label="Show">
-      <option value="all">All</option>
-      <option value="top">Top 20</option>
-      <option value="bottom">Bottom 20</option>
-    </select>
-    <select id="sort" aria-label="Sort">
-      <option value="ret-desc">Return: high → low</option>
-      <option value="ret-asc">Return: low → high</option>
-      <option value="name">Name</option>
-    </select>
-  </section>
+  <div class="content">
+    <!-- Micro Sector Scanner -->
+    <section id="page-sectors" class="page" aria-labelledby="sectors-title">
+      <header class="top">
+        <div>
+          <h1 id="sectors-title">Micro Sector Scanner</h1>
+          <p class="sub asof">Loading…</p>
+        </div>
+      </header>
 
-  <div class="legend" id="legend">
-    <span class="key"><i class="swatch idx"></i>Micro-sector index</span>
-    <span class="key"><i class="swatch bench"></i><span id="bench-name">NIFTY 500</span></span>
-    <span class="note" id="chart-note"></span>
-  </div>
+      <section class="controls" aria-label="Filters">
+        <div class="seg" role="group" aria-label="View" id="view-seg">
+          <button type="button" data-view="grid">Grid</button>
+          <button type="button" data-view="table">Table</button>
+        </div>
+        <div class="seg" role="group" aria-label="Timeframe" id="tf-seg"></div>
+        <div class="seg" role="group" aria-label="Scale" id="scale-seg">
+          <button type="button" data-scale="linear">Linear</button>
+          <button type="button" data-scale="log">Log</button>
+        </div>
+        <input type="search" id="search" placeholder="Search micro sector…" aria-label="Search micro sector">
+        <select id="broad" aria-label="Broad sector"><option value="">All sectors</option></select>
+        <select id="show" aria-label="Show">
+          <option value="all">All</option>
+          <option value="top">Top 20</option>
+          <option value="bottom">Bottom 20</option>
+        </select>
+        <select id="sort" aria-label="Sort">
+          <option value="ret-desc">Return: high → low</option>
+          <option value="ret-asc">Return: low → high</option>
+          <option value="name">Name</option>
+        </select>
+      </section>
 
-  <main>
-    <div id="grid" class="grid" aria-live="polite"></div>
-    <div id="table-wrap" class="table-wrap" hidden>
-      <table id="table" class="data"></table>
-    </div>
-    <p class="empty" id="empty" hidden>No micro sectors match.</p>
-    <p class="footnote" id="not-indexed"></p>
-  </main>
-
-  <dialog id="detail" aria-labelledby="detail-title">
-    <div class="detail-head">
-      <div>
-        <h2 id="detail-title"></h2>
-        <p class="sub" id="detail-sub"></p>
+      <div class="legend" id="legend">
+        <span class="key"><i class="swatch idx"></i>Micro-sector index</span>
+        <span class="key"><i class="swatch bench"></i><span id="bench-name">NIFTY 500</span></span>
+        <span class="note" id="chart-note"></span>
       </div>
-      <button class="icon-btn" type="button" id="detail-close" aria-label="Close">✕</button>
-    </div>
-    <div class="detail-readout" id="detail-readout"></div>
-    <div class="detail-chart" id="detail-chart"></div>
-    <div class="table-wrap"><table class="data" id="detail-table"></table></div>
-  </dialog>
 
-  <footer>
-    <p id="method"></p>
-    <p>Prices: Yahoo Finance (adjusted), cross-checked against NSE bhavcopy. Not investment advice.
-      Charts by <a href="https://www.tradingview.com/" target="_blank" rel="noopener">TradingView</a> Lightweight Charts.</p>
-  </footer>
+      <main>
+        <div id="grid" class="grid" aria-live="polite"></div>
+        <div id="table-wrap" class="table-wrap" hidden>
+          <table id="table" class="data"></table>
+        </div>
+        <p class="empty" id="empty" hidden>No micro sectors match.</p>
+        <p class="footnote" id="not-indexed"></p>
+      </main>
+    </section>
+
+    <!-- EMA Scanner -->
+    <section id="page-ema" class="page" aria-labelledby="ema-title" hidden>
+      <header class="top">
+        <div>
+          <h1 id="ema-title">EMA Scanner</h1>
+          <p class="sub asof">Loading…</p>
+        </div>
+      </header>
+
+      <section class="controls" aria-label="EMA settings">
+        <label class="field">EMA
+          <select id="ema-period" aria-label="EMA period"></select>
+        </label>
+        <div class="seg" role="group" aria-label="Show" id="ema-show-seg">
+          <button type="button" data-show="above">Above EMA</button>
+          <button type="button" data-show="fresh">Just crossed above</button>
+          <button type="button" data-show="below">Below EMA</button>
+          <button type="button" data-show="all">All</button>
+        </div>
+        <input type="search" id="ema-search" placeholder="Search micro sector or stock…" aria-label="Search micro sector or stock">
+        <select id="ema-broad" aria-label="Broad sector"><option value="">All sectors</option></select>
+        <select id="ema-sort" aria-label="Sort">
+          <option value="dist">Distance from EMA</option>
+          <option value="streak">Days above EMA</option>
+          <option value="breadth">% of stocks above EMA</option>
+          <option value="r1">1D change</option>
+          <option value="name">Name</option>
+        </select>
+        <label class="check"><input type="checkbox" id="ema-only-above"> Only stocks above EMA</label>
+      </section>
+
+      <p class="ema-summary" id="ema-summary" aria-live="polite"></p>
+      <main>
+        <div id="ema-list" class="ema-list"></div>
+        <p class="empty" id="ema-empty" hidden>No micro sectors match.</p>
+      </main>
+    </section>
+
+    <footer>
+      <p id="method"></p>
+      <p>Prices: Yahoo Finance (adjusted), cross-checked against NSE bhavcopy. Updated at 3:00 PM IST on weekdays; the day's
+        figures are an intraday snapshot until the next update replaces them with the official close. Not investment advice.
+        Charts by <a href="https://www.tradingview.com/" target="_blank" rel="noopener">TradingView</a> Lightweight Charts.</p>
+    </footer>
+  </div>
+</div>
+
+<dialog id="detail" aria-labelledby="detail-title">
+  <div class="detail-head">
+    <div>
+      <h2 id="detail-title"></h2>
+      <p class="sub" id="detail-sub"></p>
+    </div>
+    <button class="icon-btn" type="button" id="detail-close" aria-label="Close">✕</button>
+  </div>
+  <div class="detail-readout" id="detail-readout"></div>
+  <div class="detail-chart" id="detail-chart"></div>
+  <div class="table-wrap"><table class="data" id="detail-table"></table></div>
+</dialog>
 </body>
 </html>

@@ -1,8 +1,8 @@
-name: Nightly update
+name: Daily update
 
 on:
   schedule:
-    - cron: "0 14 * * 1-5"   # 19:30 IST, Mon–Fri
+    - cron: "30 9 * * 1-5"   # 15:00 IST, Mon–Fri (intraday snapshot; finalised by the next run)
   workflow_dispatch:
   push:
     branches: [main]
@@ -14,7 +14,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: nightly
+  group: daily-update
   cancel-in-progress: false
 
 jobs:
@@ -38,7 +38,7 @@ jobs:
       - name: Commit new data
         id: commit
         run: |
-          git add data/prices.parquet data/validation_report.json site/data
+          git add data/prices.parquet data/validation_report.json data/fetch_meta.json site/data
           if git diff --cached --quiet; then
             echo "No new prices (NSE holiday or data not yet published)."
             echo "changed=false" >> "$GITHUB_OUTPUT"

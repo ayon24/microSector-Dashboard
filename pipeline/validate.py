@@ -22,6 +22,7 @@ import pandas as pd
 from .common import (
     BENCHMARK,
     BIG_MOVE_THRESHOLD,
+    PROVISIONAL,
     ROOT,
     STALE_DAYS,
     VALIDATION_JSON,
@@ -99,21 +100,23 @@ def run(check_bhavcopy: bool = True) -> dict:
     if moves:
         warnings.append({"check": "big_moves", "threshold": BIG_MOVE_THRESHOLD, "moves": moves})
 
-    # Cross-check latest closes against bhavcopy
+    # Cross-check the latest official closes against bhavcopy. An intraday (provisional) bar has no
+    # bhavcopy yet, so check the last completed session instead.
     if check_bhavcopy:
-        bhav = fetch_bhavcopy(latest.date())
+        final = prices.loc[prices["source"] != PROVISIONAL, "date"].max()
+        bhav = fetch_bhavcopy(final.date())
         if bhav is None:
-            warnings.append({"check": "bhavcopy_unavailable", "date": str(latest.date())})
+            warnings.append({"check": "bhavcopy_unavailable", "date": str(final.date())})
         else:
             b = bhav.drop_duplicates("symbol").set_index("symbol")["close"]
             diffs = []
-            for s in present:
-                if s in b.index:
-                    d = close.at[latest, s] / b[s] - 1
+            for s in stocks:
+                if s in b.index and s in close.columns and pd.notna(close.at[final, s]):
+                    d = close.at[final, s] / b[s] - 1
                     if abs(d) > BHAV_TOLERANCE:
-                        diffs.append({"symbol": s, "ours": round(float(close.at[latest, s]), 2), "nse": float(b[s])})
+                        diffs.append({"symbol": s, "ours": round(float(close.at[final, s]), 2), "nse": float(b[s])})
             if diffs:
-                warnings.append({"check": "bhavcopy_mismatch", "date": str(latest.date()), "symbols": diffs})
+                warnings.append({"check": "bhavcopy_mismatch", "date": str(final.date()), "symbols": diffs})
 
     report = {
         "latest_date": str(latest.date()),

@@ -145,8 +145,8 @@ function restyleChart(c, compact) {
   c.baseLine.applyOptions({ color: cssVar("--text-3") });
 }
 
-function setChartData(c, data) {
-  const target = targetDate(summary.as_of, chartTf(state.tf));
+function setChartData(c, data, tf = chartTf(state.tf)) {
+  const target = targetDate(summary.as_of, tf);
   const idx = rebased(data.dates, data.values, target);
   const startDate = idx.points.length ? idx.points[0].time : target;
   const b = rebased(bench.dates, bench.values, startDate);
@@ -155,7 +155,7 @@ function setChartData(c, data) {
   c.chart.timeScale().fitContent();
   const m = c.idxMap = new Map(idx.points.map((p) => [p.time, p.value]));
   c.benchMap = new Map(b.points.map((p) => [p.time, p.value]));
-  return { sinceStart: idx.sinceStart, start: startDate, size: m.size };
+  return { sinceStart: idx.sinceStart, start: startDate, size: m.size, target };
 }
 
 function wireReadout(c, el, defaultText) {
@@ -163,7 +163,9 @@ function wireReadout(c, el, defaultText) {
     if (!param.time || !param.point) { el.innerHTML = defaultText(); return; }
     const t = typeof param.time === "string" ? param.time : fmtISO(param.time.year, param.time.month, param.time.day);
     const iv = c.idxMap.get(t), bv = c.benchMap.get(t);
-    el.innerHTML = `<b>${fmtDate(t)}</b> · Index ${iv != null ? fmtPct(iv - 100) : "—"} · ${esc(bench.name)} ${bv != null ? fmtPct(bv - 100) : "—"}`;
+    const ev = c.emaMap ? c.emaMap.get(t) : null;
+    el.innerHTML = `<b>${fmtDate(t)}</b> · Index ${iv != null ? fmtPct(iv - 100) : "—"} · ${esc(bench.name)} ${bv != null ? fmtPct(bv - 100) : "—"}` +
+      (ev != null ? ` · ${c.emaLabel} ${fmtPct(ev - 100)}` : "");
   });
 }
 
@@ -342,7 +344,15 @@ $("#table").addEventListener("click", (e) => {
 
 // ---------- detail ----------
 
-async function openDetail(id) {
+function emaValues(values, period) {
+  const k = 2 / (period + 1), out = new Array(values.length);
+  let e = values[0];
+  for (let i = 0; i < values.length; i++) { e = i === 0 ? values[0] : values[i] * k + e * (1 - k); out[i] = e; }
+  return out;
+}
+
+// opts.ema: EMA period to overlay (opened from the EMA scanner)
+async function openDetail(id, opts = {}) {
   const row = summary.sectors.find((s) => s.id === id);
   const data = await loadSector(id);
   const dlg = $("#detail");
@@ -356,9 +366,32 @@ async function openDetail(id) {
     wireReadout(detailChart, $("#detail-readout"), () => detailChart.detailDefault());
   }
   detailChart.chart.applyOptions(chartOptions(false));
-  const info = setChartData(detailChart, data);
-  const detailDefault = () => info.sinceStart ? `Since launch, ${fmtDate(info.start)} = 100` : `${chartTf(state.tf)}, rebased to 100 · hover for values`;
-  $("#detail-readout").textContent = detailDefault();
+  const tf = opts.ema ? (opts.ema <= 30 ? "6M" : "1Y") : chartTf(state.tf);
+  const info = setChartData(detailChart, data, tf);
+  if (!detailChart.emaSeries) {
+    detailChart.emaSeries = detailChart.chart.addSeries(LWC().LineSeries, {
+      color: cssVar("--series-ema"), lineWidth: 2, priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false, priceFormat: AXIS_FORMAT,
+    });
+  }
+  detailChart.emaMap = null;
+  if (opts.ema) {
+    let i = lastIndexOnOrBefore(data.dates, info.target);
+    if (i < 0) i = 0;
+    const ev = emaValues(data.values, opts.ema), base = data.values[i], pts = [];
+    for (let k = i; k < data.dates.length; k++) pts.push({ time: data.dates[k], value: (ev[k] / base) * 100 });
+    detailChart.emaSeries.setData(pts);
+    detailChart.emaMap = new Map(pts.map((q) => [q.time, q.value]));
+    detailChart.emaLabel = `${opts.ema}-day EMA`;
+  } else {
+    detailChart.emaSeries.setData([]);
+  }
+  detailChart.chart.timeScale().fitContent();
+  const detailDefault = () => {
+    const base = info.sinceStart ? `Since launch, ${fmtDate(info.start)} = 100` : `${tf}, rebased to 100`;
+    const key = opts.ema ? ` · <span class="key"><i class="swatch ema"></i>${opts.ema}-day EMA</span>` : "";
+    return `${base} · <span class="key"><i class="swatch idx"></i>Index</span> · <span class="key"><i class="swatch bench"></i>${esc(bench.name)}</span>${key} · hover for values`;
+  };
+  $("#detail-readout").innerHTML = detailDefault();
   detailChart.detailDefault = detailDefault;
 
   const tfs = summary.timeframes;
@@ -422,7 +455,180 @@ function wireControls() {
 
 function restyleAll() {
   for (const entry of cards.values()) if (entry.chart) restyleChart(entry.chart, true);
-  if (detailChart) restyleChart(detailChart, false);
+  if (detailChart) {
+    restyleChart(detailChart, false);
+    if (detailChart.emaSeries) detailChart.emaSeries.applyOptions({ color: cssVar("--series-ema") });
+  }
+}
+
+// ---------- EMA scanner ----------
+
+const ema = {
+  period: store.get("ema-period", "20"),
+  show: store.get("ema-show", "above"),
+  onlyAbove: store.get("ema-only-above", "0") === "1",
+  q: "",
+  broad: "",
+  sort: "dist",
+  open: new Set(),
+};
+let emaData = null;
+const FRESH_DAYS = 5;
+
+function fmtStreak(st) {
+  if (st == null) return "—";
+  return st > 0 ? `▲ Above ${st}d` : `▼ Below ${-st}d`;
+}
+
+function sectorEma(sec) {
+  const e = sec.ema[ema.period];
+  if (!e) return null;
+  let above = 0, total = 0;
+  for (const sym of sec.constituents) {
+    const se = emaData.stocks[sym] && emaData.stocks[sym].ema[ema.period];
+    if (!se) continue;
+    total++;
+    if (se[0] > 0) above++;
+  }
+  return { dist: e[0], streak: e[1], above, total, breadth: total ? (100 * above) / total : null };
+}
+
+// A query that is exactly a stock symbol (e.g. "HAL") matches only that stock; otherwise match
+// symbol or company name by substring.
+function stockMatches(sym, q) {
+  const st = emaData.stocks[sym];
+  if (!st) return false;
+  if (emaData.stocks[q.toUpperCase()]) return sym.toLowerCase() === q;
+  return sym.toLowerCase().includes(q) || st.n.toLowerCase().includes(q);
+}
+
+function emaRows() {
+  const q = ema.q.trim().toLowerCase();
+  let rows = emaData.sectors.filter((s) => s.indexed).map((s) => ({ s, e: sectorEma(s) })).filter((r) => r.e);
+  const universe = rows.length;
+  const aboveCount = rows.filter((r) => r.e.dist > 0).length;
+  const freshCount = rows.filter((r) => r.e.streak > 0 && r.e.streak <= FRESH_DAYS).length;
+  if (ema.show === "above") rows = rows.filter((r) => r.e.dist > 0);
+  else if (ema.show === "below") rows = rows.filter((r) => r.e.dist <= 0);
+  else if (ema.show === "fresh") rows = rows.filter((r) => r.e.streak > 0 && r.e.streak <= FRESH_DAYS);
+  if (ema.broad) rows = rows.filter((r) => r.s.broad_sector === ema.broad);
+  if (q) {
+    rows = rows.filter((r) => {
+      r.hits = r.s.members.filter((sym) => stockMatches(sym, q));
+      if (emaData.stocks[q.toUpperCase()]) return r.hits.length > 0;
+      return r.s.name.toLowerCase().includes(q) || r.s.broad_sector.toLowerCase().includes(q) || r.hits.length;
+    });
+  }
+  const key = {
+    dist: (r) => r.e.dist, streak: (r) => r.e.streak, breadth: (r) => r.e.breadth ?? -1, r1: (r) => r.s.r1 ?? -Infinity,
+  }[ema.sort];
+  rows.sort(ema.sort === "name" ? (a, b) => a.s.name.localeCompare(b.s.name) : (a, b) => key(b) - key(a));
+  return { rows, universe, aboveCount, freshCount };
+}
+
+function stockTable(r) {
+  const q = ema.q.trim().toLowerCase();
+  const inIdx = new Set(r.s.constituents);
+  let list = r.s.members.map((sym) => ({ sym, st: emaData.stocks[sym] })).filter((x) => x.st);
+  list = list.map((x) => ({ ...x, e: x.st.ema[ema.period] || null }));
+  if (ema.onlyAbove) list = list.filter((x) => x.e && x.e[0] > 0);
+  list.sort((a, b) => (b.e ? b.e[0] : -Infinity) - (a.e ? a.e[0] : -Infinity));
+  if (!list.length) return `<p class="empty">No stocks above the ${ema.period}-day EMA in this micro sector.</p>`;
+  return `<div class="table-wrap"><table class="data"><thead><tr>
+      <th class="l name" scope="col">Stock</th><th class="l" scope="col">Symbol</th><th scope="col">Close</th>
+      <th scope="col">vs ${ema.period}-day EMA</th><th scope="col">Status</th><th scope="col">1D</th><th scope="col">In index</th>
+    </tr></thead><tbody>${list.map((x) => `<tr class="${q && stockMatches(x.sym, q) ? "hit" : ""}">
+      <td class="l name">${esc(x.st.n)}</td><td class="l">${esc(x.sym)}</td>
+      <td>${x.st.c != null ? x.st.c.toLocaleString("en-IN", { maximumFractionDigits: 2 }) : "—"}</td>
+      <td class="${cls(x.e && x.e[0])}">${x.e ? fmtPct(x.e[0], 2) : "—"}</td>
+      <td class="status ${x.e ? (x.e[1] > 0 ? "pos" : "neg") : "muted"}">${x.e ? fmtStreak(x.e[1]) : "Not enough history"}</td>
+      <td class="${cls(x.st.r1)}">${fmtPct(x.st.r1)}</td>
+      <td>${inIdx.has(x.sym) ? "Yes" : '<span class="tag">No</span>'}</td></tr>`).join("")}</tbody></table></div>`;
+}
+
+function renderEma() {
+  if (!emaData) return;
+  document.querySelectorAll("#ema-show-seg button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.show === ema.show));
+  const { rows, universe, aboveCount, freshCount } = emaRows();
+  $("#ema-summary").innerHTML = `<b>${aboveCount}</b> of ${universe} micro sectors are above their ${ema.period}-day EMA · ` +
+    `<b>${freshCount}</b> crossed above in the last ${FRESH_DAYS} sessions · showing ${rows.length}`;
+  $("#ema-empty").hidden = rows.length > 0;
+  const q = ema.q.trim();
+  $("#ema-list").innerHTML = rows.map((r) => {
+    const open = ema.open.has(r.s.id) || (q && r.hits && r.hits.length);
+    const e = r.e;
+    return `<details class="ema-row" data-id="${r.s.id}"${open ? " open" : ""}>
+      <summary>
+        <div class="ema-name">${esc(r.s.name)}<div class="card-broad">${esc(r.s.broad_sector)} · ${r.s.constituents.length} stocks</div></div>
+        <div class="metric"><span class="lbl">vs ${ema.period}-day EMA</span><span class="val ${cls(e.dist)}">${fmtPct(e.dist, 2)}</span></div>
+        <div class="metric m-streak"><span class="lbl">Streak</span><span class="val ${e.streak > 0 ? "pos" : "neg"}">${fmtStreak(e.streak)}</span></div>
+        <div class="metric m-breadth"><span class="lbl">Stocks above EMA</span><span class="val">${e.total ? `${e.above} / ${e.total}` : "—"}</span>
+          <div class="bar" aria-hidden="true"><i style="width:${e.breadth ?? 0}%"></i></div></div>
+        <div class="metric m-r1"><span class="lbl">1D</span><span class="val ${cls(r.s.r1)}">${fmtPct(r.s.r1)}</span></div>
+        <svg class="chev" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="m9 6 6 6-6 6-1.4-1.4 4.6-4.6-4.6-4.6L9 6Z"/></svg>
+      </summary>
+      <div class="ema-stocks">${open ? emaStocksBody(r) : ""}</div>
+    </details>`;
+  }).join("");
+  emaRowsById = new Map(rows.map((r) => [r.s.id, r]));
+}
+
+let emaRowsById = new Map();
+function emaStocksBody(r) {
+  return `<div class="ema-stocks-head"><span>Members, sorted by distance from the ${ema.period}-day EMA</span>
+    <button type="button" class="link-btn" data-chart="${r.s.id}">Open chart with EMA</button></div>${stockTable(r)}`;
+}
+
+function wireEma() {
+  const sel = $("#ema-period");
+  if (!emaData.periods.map(String).includes(ema.period)) ema.period = String(emaData.periods.includes(20) ? 20 : emaData.periods[0]);
+  sel.innerHTML = emaData.periods.map((p) => `<option value="${p}">${p}-day</option>`).join("");
+  sel.value = ema.period;
+  sel.addEventListener("change", () => { ema.period = sel.value; store.set("ema-period", ema.period); renderEma(); });
+  $("#ema-show-seg").addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; ema.show = b.dataset.show; store.set("ema-show", ema.show); renderEma(); });
+  $("#ema-search").addEventListener("input", (e) => { ema.q = e.target.value; renderEma(); });
+  $("#ema-broad").insertAdjacentHTML("beforeend", [...new Set(emaData.sectors.map((s) => s.broad_sector))].sort().map((b) => `<option>${esc(b)}</option>`).join(""));
+  $("#ema-broad").addEventListener("change", (e) => { ema.broad = e.target.value; renderEma(); });
+  $("#ema-sort").addEventListener("change", (e) => { ema.sort = e.target.value; renderEma(); });
+  const only = $("#ema-only-above");
+  only.checked = ema.onlyAbove;
+  only.addEventListener("change", () => { ema.onlyAbove = only.checked; store.set("ema-only-above", only.checked ? "1" : "0"); renderEma(); });
+  $("#ema-list").addEventListener("toggle", (e) => {
+    const d = e.target;
+    if (!d.matches || !d.matches("details.ema-row")) return;
+    const id = d.dataset.id;
+    if (d.open) {
+      ema.open.add(id);
+      const body = d.querySelector(".ema-stocks");
+      if (!body.innerHTML) body.innerHTML = emaStocksBody(emaRowsById.get(id));
+    } else ema.open.delete(id);
+  }, true);
+  $("#ema-list").addEventListener("click", (e) => {
+    const b = e.target.closest("button[data-chart]");
+    if (b) openDetail(b.dataset.chart, { ema: Number(ema.period) });
+  });
+}
+
+async function showEma() {
+  if (!emaData) {
+    emaData = await getJSON("data/ema.json");
+    wireEma();
+  }
+  renderEma();
+}
+
+// ---------- pages ----------
+
+function route() {
+  const page = location.hash.startsWith("#/ema") ? "ema" : "sectors";
+  $("#page-sectors").hidden = page !== "sectors";
+  $("#page-ema").hidden = page !== "ema";
+  document.querySelectorAll(".nav a").forEach((a) => {
+    if (a.dataset.page === page) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
+  });
+  document.title = page === "ema" ? "EMA Scanner · Micro-Sector Dashboard" : "Micro Sector Scanner · Micro-Sector Dashboard";
+  if (page === "ema") showEma().catch((e) => { $("#ema-summary").textContent = "Could not load EMA data: " + e.message; console.error(e); });
+  else render();
 }
 
 // ---------- boot ----------
@@ -430,7 +636,12 @@ function restyleAll() {
 async function main() {
   [summary, bench] = await Promise.all([getJSON("data/summary.json"), getJSON("data/benchmark.json")]);
   if (!summary.timeframes.includes(state.tf)) state.tf = "1Y";
-  $("#asof").textContent = `Data as of ${fmtDate(summary.as_of)} close · ${summary.sectors.filter((s) => s.indexed).length} micro-sector indices vs ${bench.name}`;
+  const when = summary.provisional
+    ? `Data as of ${fmtDate(summary.as_of)}, ${summary.snapshot_ist || "intraday"} IST snapshot <span class="prov">(provisional until the official close is loaded)</span>`
+    : `Data as of ${fmtDate(summary.as_of)} close`;
+  document.querySelectorAll(".asof").forEach((el) => {
+    el.innerHTML = `${when} · ${summary.sectors.filter((s) => s.indexed).length} micro-sector indices vs ${esc(bench.name)}`;
+  });
   $("#bench-name").textContent = bench.name;
   const m = summary.methodology;
   $("#method").textContent = `Method: ${m.weighting}. Stocks need a 20-day median traded value of ₹${m.min_median_traded_value_cr} crore; a micro sector needs ${m.min_constituents}+ eligible stocks to be indexed. Returns use adjusted closes.`;
@@ -439,11 +650,12 @@ async function main() {
     ? `Not indexed yet (fewer than ${m.min_constituents} eligible stocks): ${notIndexed.map((s) => s.name).join(", ")}. Shown in the table view.`
     : "";
   wireControls();
-  render();
+  window.addEventListener("hashchange", route);
+  route();
 }
 
 function boot() {
   if (!window.LightweightCharts) { setTimeout(boot, 30); return; }
-  main().catch((e) => { $("#asof").textContent = "Could not load data: " + e.message; console.error(e); });
+  main().catch((e) => { document.querySelectorAll(".asof").forEach((el) => { el.textContent = "Could not load data: " + e.message; }); console.error(e); });
 }
 boot();

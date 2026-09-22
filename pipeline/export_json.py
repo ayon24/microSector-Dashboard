@@ -3,6 +3,7 @@
 site/data/summary.json          one row per micro sector: returns per timeframe, breadth, MA status
 site/data/benchmark.json        NIFTY 500 daily closes
 site/data/indices/<id>.json     daily index levels + constituent table (loaded on demand)
+site/data/ema.json              distance from EMA and streak, per index and per stock, for each preset period
 
 Output is deterministic (no timestamps beyond the data date), so a night with no new prices
 produces no diff and the workflow skips publishing.
@@ -19,6 +20,7 @@ import pandas as pd
 from .common import (
     BENCHMARK,
     BENCHMARK_NAME,
+    FETCH_META_JSON,
     INDICES_PARQUET,
     MIN_CONSTITUENTS,
     MIN_MEDIAN_TRADED_VALUE,
@@ -33,6 +35,7 @@ log = logging.getLogger("export")
 
 TIMEFRAMES = ["1D", "1W", "1M", "3M", "6M", "YTD", "1Y", "3Y", "5Y"]
 EXPORT_YEARS = 5
+EMA_PERIODS = [5, 9, 10, 20, 21, 30, 50, 100, 150, 200]
 OFFSETS = {
     "1W": pd.DateOffset(weeks=1),
     "1M": pd.DateOffset(months=1),
@@ -71,6 +74,25 @@ def above_ma(series: pd.Series, window: int) -> bool | None:
     if len(s) < window:
         return None
     return bool(s.iloc[-1] > s.iloc[-window:].mean())
+
+
+def ema_stats(series: pd.Series) -> dict[str, list]:
+    """{period: [% distance of last close from its EMA, streak]} for each preset period.
+
+    The streak counts consecutive sessions on the current side of the EMA, positive when above
+    and negative when below. Periods longer than the available history are left out.
+    """
+    s = series.dropna()
+    out = {}
+    for p in EMA_PERIODS:
+        if len(s) < p:
+            continue
+        ema = s.ewm(span=p, adjust=False).mean()
+        above = (s > ema).to_numpy()[::-1]
+        flips = np.flatnonzero(above != above[0])
+        streak = int(flips[0]) if len(flips) else len(above)
+        out[str(p)] = [round(float(s.iloc[-1] / ema.iloc[-1] - 1) * 100, 2), streak if above[0] else -streak]
+    return out
 
 
 def pct(values: list[bool | None]) -> float | None:
@@ -168,8 +190,32 @@ def run() -> dict:
         (SITE_DATA / "indices" / f"{sector_id}.json").write_text(json.dumps(detail, separators=(",", ":")))
         sectors.append(row)
 
+    ema = {
+        "as_of": as_of.strftime("%Y-%m-%d"),
+        "periods": EMA_PERIODS,
+        "sectors": [
+            {
+                "id": sid, "name": m["name"], "broad_sector": m["broad_sector"], "indexed": m["indexed"],
+                "members": [s for s in m["members"] if s in stock_rows], "constituents": m["constituents"],
+                "r1": returns(idx[sid])["1D"] if m["indexed"] else None,
+                "ema": ema_stats(idx[sid]) if m["indexed"] else {},
+            }
+            for sid, m in meta.items()
+        ],
+        "stocks": {
+            sym: {"n": r["name"], "c": r["close"], "r1": r["returns"]["1D"], "ema": ema_stats(close[sym])}
+            for sym, r in stock_rows.items()
+        },
+    }
+    fetch = json.loads(FETCH_META_JSON.read_text()) if FETCH_META_JSON.exists() else {}
+    provisional = bool(fetch.get("provisional")) and fetch.get("latest_date") == as_of.strftime("%Y-%m-%d")
+    ema["provisional"] = provisional
+    (SITE_DATA / "ema.json").write_text(json.dumps(ema, separators=(",", ":")))
+
     summary = {
         "as_of": as_of.strftime("%Y-%m-%d"),
+        "provisional": provisional,
+        "snapshot_ist": fetch.get("snapshot_ist") if provisional else None,
         "timeframes": TIMEFRAMES,
         "benchmark": {"name": BENCHMARK_NAME, "returns": returns(bench)},
         "methodology": {

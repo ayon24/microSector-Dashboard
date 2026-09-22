@@ -1,7 +1,7 @@
 # Micro-Sector Dashboard
 
 Equal-weight micro-sector indices for NSE stocks, compared with the NIFTY 500, published as a
-static site. A GitHub Actions job refreshes the data after every trading day.
+static site. A GitHub Actions job refreshes the data at 3:00 PM IST every weekday.
 
 **Pilot scope:** Pharma & Healthcare, Capital Goods and Chemicals (23 micro sectors, 177 stocks).
 
@@ -61,7 +61,9 @@ symbols have no price for the latest date. For each flagged move:
 
 1. Create a repository and push this directory to `main`.
 2. In **Settings → Pages**, set *Source* to **GitHub Actions**.
-3. The workflow `.github/workflows/nightly.yml` runs Mon–Fri at 19:30 IST. You can also run it from
+3. The workflow `.github/workflows/nightly.yml` runs Mon–Fri at 15:00 IST. That is before the 3:30 PM close,
+   so the day's bar is an intraday snapshot (shown as provisional on the site) and is replaced by the
+   official close on the next run. GitHub may start scheduled jobs a few minutes late. You can also run it from
    the Actions tab or trigger it by pushing changes to `site/`, `taxonomy/` or `pipeline/`. On NSE holidays nothing changes, so
    nothing is committed or deployed.
 

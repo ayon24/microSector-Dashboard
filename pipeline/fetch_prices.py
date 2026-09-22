@@ -3,6 +3,10 @@
     python -m pipeline.fetch_prices          # incremental (backfills any new symbols)
     python -m pipeline.fetch_prices --full   # re-download everything
 
+The daily job runs at 3:00 PM IST, before the 3:30 PM close, so today's bar is an intraday
+snapshot. It is stored with source "yahoo_provisional" and replaced by the official close on the
+next run, which re-downloads the last few sessions anyway.
+
 Yahoo's adjusted history is rewritten whenever a stock goes ex-split/bonus/dividend, so on
 each update the overlapping days are compared with what we stored; any symbol whose history
 moved gets fully re-downloaded instead of having new rows appended to a stale series.
@@ -10,6 +14,7 @@ moved gets fully re-downloaded instead of having new rows appended to a stale se
 from __future__ import annotations
 
 import argparse
+import json
 import logging
 from datetime import timedelta
 
@@ -18,8 +23,10 @@ import pandas as pd
 from .common import (
     BENCHMARK,
     HISTORY_YEARS,
+    FETCH_META_JSON,
     MARKET_DATA_FINAL_IST,
     PRICES_PARQUET,
+    PROVISIONAL,
     load_taxonomy,
     now_ist,
 )
@@ -31,11 +38,18 @@ OVERLAP_DAYS = 10
 READJUST_TOLERANCE = 0.002
 
 
-def _drop_unfinished_bar(df: pd.DataFrame) -> pd.DataFrame:
+def _market_closed_for_today() -> bool:
     now = now_ist()
-    today = pd.Timestamp(now.date())
-    if (now.hour, now.minute) < MARKET_DATA_FINAL_IST:
-        return df[df["date"] < today]
+    return (now.hour, now.minute) >= MARKET_DATA_FINAL_IST
+
+
+def _label_provisional(df: pd.DataFrame) -> pd.DataFrame:
+    """Before the close is final, today's Yahoo bar is an intraday snapshot."""
+    if _market_closed_for_today():
+        return df
+    df = df.copy()
+    today = pd.Timestamp(now_ist().date())
+    df.loc[(df["date"] == today) & (df["source"] == "yahoo"), "source"] = PROVISIONAL
     return df
 
 
@@ -50,8 +64,11 @@ def _fill_gaps_from_fallbacks(prices: pd.DataFrame, symbols: list[str]) -> pd.Da
     """If Yahoo missed the latest session (or a trading day entirely), fill from bhavcopy, then broker."""
     now = now_ist()
     candidates = {prices["date"].max()}
-    if now.weekday() < 5 and (now.hour, now.minute) >= MARKET_DATA_FINAL_IST:
+    if now.weekday() < 5 and _market_closed_for_today():
         candidates.add(pd.Timestamp(now.date()))
+    else:
+        # bhavcopy for today only exists after the close; a gap in the intraday snapshot is expected
+        candidates.discard(pd.Timestamp(now.date()))
     stock_syms = [s for s in symbols if not s.startswith("^")]
     for day in sorted(d for d in candidates if pd.notna(d)):
         have = set(prices.loc[prices["date"] == day, "symbol"])
@@ -118,9 +135,8 @@ def run(full: bool = False) -> pd.DataFrame:
             recent = recent[~recent["symbol"].isin(readjusted)]
         prices = _upsert(prices, recent.assign(source="yahoo"))
 
-    prices = _drop_unfinished_bar(prices)
+    prices = _label_provisional(prices)
     prices = _fill_gaps_from_fallbacks(prices, symbols)
-    prices = _drop_unfinished_bar(prices)
 
     cutoff = pd.Timestamp(now_ist().date()) - pd.DateOffset(years=HISTORY_YEARS) - timedelta(days=7)
     prices = prices[prices["date"] >= cutoff]
@@ -134,6 +150,12 @@ def run(full: bool = False) -> pd.DataFrame:
     else:
         PRICES_PARQUET.parent.mkdir(parents=True, exist_ok=True)
         prices.to_parquet(PRICES_PARQUET, index=False, compression="zstd")
+    latest = prices["date"].max()
+    provisional = bool((prices.loc[prices["date"] == latest, "source"] == PROVISIONAL).any())
+    meta = {"latest_date": str(latest.date()), "provisional": provisional}
+    if provisional:
+        meta["snapshot_ist"] = now_ist().strftime("%H:%M")
+    FETCH_META_JSON.write_text(json.dumps(meta, indent=1))
     log.info(
         "Saved %d rows, %d symbols, %s → %s",
         len(prices), prices["symbol"].nunique(), prices["date"].min().date(), prices["date"].max().date(),
