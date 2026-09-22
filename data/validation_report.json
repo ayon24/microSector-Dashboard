@@ -1,7 +1,153 @@
 {
-  "latest_date": "2026-09-21",
-  "symbols_expected": 344,
-  "symbols_on_latest_date": 344,
+  "latest_date": "2026-09-22",
+  "symbols_expected": 1522,
+  "symbols_on_latest_date": 1522,
   "errors": [],
-  "warnings": []
+  "warnings": [
+    {
+      "check": "big_moves",
+      "threshold": 0.2,
+      "moves": [
+        {
+          "symbol": "ARVINDFASN",
+          "date": "2021-07-22",
+          "return": 0.2
+        },
+        {
+          "symbol": "ATGL",
+          "date": "2023-01-27",
+          "return": -0.2
+        },
+        {
+          "symbol": "CENTENKA",
+          "date": "2021-06-02",
+          "return": 0.2
+        },
+        {
+          "symbol": "FORCEMOT",
+          "date": "2023-05-30",
+          "return": 0.2
+        },
+        {
+          "symbol": "GPIL",
+          "date": "2022-05-23",
+          "return": -0.2
+        },
+        {
+          "symbol": "GREENPLY",
+          "date": "2021-02-12",
+          "return": 0.2
+        },
+        {
+          "symbol": "GRWRHITECH",
+          "date": "2024-02-08",
+          "return": 0.2
+        },
+        {
+          "symbol": "INDIAGLYCO",
+          "date": "2021-12-29",
+          "return": 0.2
+        },
+        {
+          "symbol": "JNKINDIA",
+          "date": "2024-06-18",
+          "return": 0.2
+        },
+        {
+          "symbol": "MACPOWER",
+          "date": "2023-10-23",
+          "return": 0.2
+        },
+        {
+          "symbol": "MANALIPETC",
+          "date": "2021-02-10",
+          "return": 0.2
+        },
+        {
+          "symbol": "MBAPL",
+          "date": "2022-02-07",
+          "return": 0.2
+        },
+        {
+          "symbol": "MENONBE",
+          "date": "2020-10-23",
+          "return": 0.2
+        },
+        {
+          "symbol": "MODISONLTD",
+          "date": "2024-01-31",
+          "return": 0.2
+        },
+        {
+          "symbol": "MOL",
+          "date": "2021-11-26",
+          "return": 0.2
+        },
+        {
+          "symbol": "MUNJALAU",
+          "date": "2024-07-31",
+          "return": 0.2
+        },
+        {
+          "symbol": "NDRAUTO",
+          "date": "2025-05-12",
+          "return": 0.2
+        },
+        {
+          "symbol": "PITTIENG",
+          "date": "2020-11-02",
+          "return": 0.2
+        },
+        {
+          "symbol": "REFEX",
+          "date": "2020-10-16",
+          "return": 0.2
+        },
+        {
+          "symbol": "RIIL",
+          "date": "2021-06-10",
+          "return": 0.2
+        },
+        {
+          "symbol": "SHANKARA",
+          "date": "2021-02-17",
+          "return": 0.2
+        },
+        {
+          "symbol": "SKIPPER",
+          "date": "2023-08-14",
+          "return": 0.2
+        },
+        {
+          "symbol": "SKMEGGPROD",
+          "date": "2022-09-05",
+          "return": 0.2
+        },
+        {
+          "symbol": "SMLMAH",
+          "date": "2023-04-03",
+          "return": 0.2
+        },
+        {
+          "symbol": "TCI",
+          "date": "2021-05-26",
+          "return": 0.2
+        },
+        {
+          "symbol": "TEMBO",
+          "date": "2024-09-03",
+          "return": 0.2
+        },
+        {
+          "symbol": "ZFCVINDIA",
+          "date": "2024-05-27",
+          "return": 0.2
+        }
+      ]
+    },
+    {
+      "check": "bhavcopy_unavailable",
+      "date": "2026-09-22"
+    }
+  ]
 }
