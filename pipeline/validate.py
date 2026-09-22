@@ -35,6 +35,9 @@ log = logging.getLogger("validate")
 
 REVIEWED_CSV = ROOT / "taxonomy" / "reviewed_moves.csv"
 BHAV_TOLERANCE = 0.01
+# NSE's widest circuit is 20%, so a move of exactly 20% is a circuit hit, not a data error. Yahoo's
+# adjusted closes put such moves a hair either side of 20%, so leave a small margin.
+CIRCUIT_TOLERANCE = 0.001
 GAP_LOOKBACK = 60
 
 
@@ -89,7 +92,7 @@ def run(check_bhavcopy: bool = True) -> dict:
     for s in [c for c in stocks if c in close.columns]:
         series = close[s].dropna()
         ret = series.pct_change()
-        for d, r in ret[ret.abs() > BIG_MOVE_THRESHOLD].items():
+        for d, r in ret[ret.abs() > BIG_MOVE_THRESHOLD + CIRCUIT_TOLERANCE].items():
             if (s, d) in reviewed:
                 continue
             moves.append({"symbol": s, "date": str(d.date()), "return": round(float(r), 4)})
