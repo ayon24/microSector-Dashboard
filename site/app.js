@@ -523,13 +523,32 @@ function emaRows() {
   return { rows, universe, crossed };
 }
 
-function stockTable(r) {
-  const q = ema.q.trim().toLowerCase();
-  const inIdx = new Set(r.s.constituents);
+// The stocks an expanded row shows, in display order (respects "Only stocks above EMA").
+function visibleStocks(r) {
   let list = r.s.members.map((sym) => ({ sym, st: emaData.stocks[sym] })).filter((x) => x.st);
   list = list.map((x) => ({ ...x, e: x.st.ema[ema.period] || null }));
   if (ema.onlyAbove) list = list.filter((x) => x.e && x.e[0] > 0);
-  list.sort((a, b) => (b.e ? b.e[0] : -Infinity) - (a.e ? a.e[0] : -Infinity));
+  return list.sort((a, b) => (b.e ? b.e[0] : -Infinity) - (a.e ? a.e[0] : -Infinity));
+}
+
+async function copyText(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch (e) {
+    const ta = document.createElement("textarea");
+    ta.value = text; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    const ok = document.execCommand("copy");
+    ta.remove();
+    return ok;
+  }
+}
+
+function stockTable(r) {
+  const q = ema.q.trim().toLowerCase();
+  const inIdx = new Set(r.s.constituents);
+  const list = visibleStocks(r);
   if (!list.length) return `<p class="empty">No stocks above the ${ema.period}-day EMA in this micro sector.</p>`;
   return `<div class="table-wrap"><table class="data"><thead><tr>
       <th class="l name" scope="col">Stock</th><th class="l" scope="col">Symbol</th><th scope="col">Close</th>
@@ -564,6 +583,9 @@ function renderEma() {
         <div class="metric m-breadth"><span class="lbl">Stocks above EMA</span><span class="val">${e.total ? `${e.above} / ${e.total}` : "—"}</span>
           <div class="bar" aria-hidden="true"><i style="width:${e.breadth ?? 0}%"></i></div></div>
         <div class="metric m-r1"><span class="lbl">1D</span><span class="val ${cls(r.s.r1)}">${fmtPct(r.s.r1)}</span></div>
+        <button type="button" class="row-btn" data-chart="${r.s.id}" aria-label="Open ${esc(r.s.name)} chart with ${ema.period}-day EMA" title="Chart with ${ema.period}-day EMA">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M3 17.6 9 11l4 4 6.3-7.1L21 9.3 13 18.4l-4-4-4.6 5-1.4-1.8ZM3 4h2v12.2l-2 2.2V4Z"/></svg><span>Chart</span>
+        </button>
         <svg class="chev" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="m9 6 6 6-6 6-1.4-1.4 4.6-4.6-4.6-4.6L9 6Z"/></svg>
       </summary>
       <div class="ema-stocks">${open ? emaStocksBody(r) : ""}</div>
@@ -575,8 +597,12 @@ function renderEma() {
 let emaRowsById = new Map();
 function emaStocksBody(r) {
   const today = r.s.constituents.filter((sym) => { const x = emaData.stocks[sym]; return x && x.ema[ema.period] && x.ema[ema.period][1] === 1; }).length;
+  const n = visibleStocks(r).length;
   return `<div class="ema-stocks-head"><span>Members, sorted by distance from the ${ema.period}-day EMA · ${today} crossed above today</span>
-    <button type="button" class="link-btn" data-chart="${r.s.id}">Open chart with EMA</button></div>${stockTable(r)}`;
+    <span class="head-btns">
+      <button type="button" class="link-btn" data-copy="${r.s.id}"${n ? "" : " disabled"} title="Copy symbols as SYM1+SYM2+…">Copy ${n} stock${n === 1 ? "" : "s"}</button>
+      <button type="button" class="link-btn" data-chart="${r.s.id}">Open chart with EMA</button>
+    </span></div>${stockTable(r)}`;
 }
 
 function wireEma() {
@@ -602,9 +628,21 @@ function wireEma() {
       if (!body.innerHTML) body.innerHTML = emaStocksBody(emaRowsById.get(id));
     } else ema.open.delete(id);
   }, true);
-  $("#ema-list").addEventListener("click", (e) => {
-    const b = e.target.closest("button[data-chart]");
-    if (b) openDetail(b.dataset.chart, { ema: Number(ema.period) });
+  $("#ema-list").addEventListener("click", async (e) => {
+    const chart = e.target.closest("button[data-chart]");
+    if (chart) {
+      e.preventDefault(); // a button inside <summary> must not also expand the row
+      openDetail(chart.dataset.chart, { ema: Number(ema.period) });
+      return;
+    }
+    const copy = e.target.closest("button[data-copy]");
+    if (copy) {
+      const syms = visibleStocks(emaRowsById.get(copy.dataset.copy)).map((x) => x.sym);
+      const ok = await copyText(syms.join("+"));
+      const label = copy.textContent;
+      copy.textContent = ok ? `Copied ${syms.length} ✓` : "Copy failed";
+      setTimeout(() => { copy.textContent = label; }, 1600);
+    }
   });
 }
 
