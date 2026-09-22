@@ -185,7 +185,7 @@ dialog::backdrop { background: rgba(0, 0, 0, .45); }
 .ema-row[open] { border-color: var(--text-3); }
 .ema-row > summary {
   list-style: none; cursor: pointer; display: grid; align-items: center; gap: 12px; padding: 10px 14px;
-  grid-template-columns: minmax(180px, 2.2fr) repeat(4, minmax(84px, 1fr)) 20px;
+  grid-template-columns: minmax(180px, 2.2fr) repeat(3, minmax(96px, 1fr)) 20px;
 }
 .ema-row > summary::-webkit-details-marker { display: none; }
 .ema-row > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 10px; }
@@ -207,7 +207,7 @@ table.data tr.hit td { background: var(--surface-2); }
 
 @media (max-width: 900px) {
   .ema-row > summary { grid-template-columns: minmax(0, 1fr) auto auto 20px; }
-  .ema-row .m-streak, .ema-row .m-r1 { display: none; }
+  .ema-row .m-r1 { display: none; }
 }
 @media (max-width: 800px) {
   .app { flex-direction: column; }

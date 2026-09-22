@@ -465,7 +465,6 @@ function restyleAll() {
 
 const ema = {
   period: store.get("ema-period", "20"),
-  show: store.get("ema-show", "above"),
   onlyAbove: store.get("ema-only-above", "0") === "1",
   q: "",
   broad: "",
@@ -473,7 +472,6 @@ const ema = {
   open: new Set(),
 };
 let emaData = null;
-const FRESH_DAYS = 5;
 
 function fmtStreak(st) {
   if (st == null) return "—";
@@ -504,13 +502,12 @@ function stockMatches(sym, q) {
 
 function emaRows() {
   const q = ema.q.trim().toLowerCase();
+  // Only micro sectors whose index crossed above the EMA on the latest session:
+  // below (or on) it the session before, above it now.
   let rows = emaData.sectors.filter((s) => s.indexed).map((s) => ({ s, e: sectorEma(s) })).filter((r) => r.e);
   const universe = rows.length;
-  const aboveCount = rows.filter((r) => r.e.dist > 0).length;
-  const freshCount = rows.filter((r) => r.e.streak > 0 && r.e.streak <= FRESH_DAYS).length;
-  if (ema.show === "above") rows = rows.filter((r) => r.e.dist > 0);
-  else if (ema.show === "below") rows = rows.filter((r) => r.e.dist <= 0);
-  else if (ema.show === "fresh") rows = rows.filter((r) => r.e.streak > 0 && r.e.streak <= FRESH_DAYS);
+  rows = rows.filter((r) => r.e.streak === 1);
+  const crossed = rows.length;
   if (ema.broad) rows = rows.filter((r) => r.s.broad_sector === ema.broad);
   if (q) {
     rows = rows.filter((r) => {
@@ -520,10 +517,10 @@ function emaRows() {
     });
   }
   const key = {
-    dist: (r) => r.e.dist, streak: (r) => r.e.streak, breadth: (r) => r.e.breadth ?? -1, r1: (r) => r.s.r1 ?? -Infinity,
+    dist: (r) => r.e.dist, breadth: (r) => r.e.breadth ?? -1, r1: (r) => r.s.r1 ?? -Infinity,
   }[ema.sort];
   rows.sort(ema.sort === "name" ? (a, b) => a.s.name.localeCompare(b.s.name) : (a, b) => key(b) - key(a));
-  return { rows, universe, aboveCount, freshCount };
+  return { rows, universe, crossed };
 }
 
 function stockTable(r) {
@@ -541,18 +538,21 @@ function stockTable(r) {
       <td class="l name">${esc(x.st.n)}</td><td class="l">${esc(x.sym)}</td>
       <td>${x.st.c != null ? x.st.c.toLocaleString("en-IN", { maximumFractionDigits: 2 }) : "—"}</td>
       <td class="${cls(x.e && x.e[0])}">${x.e ? fmtPct(x.e[0], 2) : "—"}</td>
-      <td class="status ${x.e ? (x.e[1] > 0 ? "pos" : "neg") : "muted"}">${x.e ? fmtStreak(x.e[1]) : "Not enough history"}</td>
+      <td class="status ${x.e ? (x.e[1] > 0 ? "pos" : "neg") : "muted"}">${x.e ? (x.e[1] === 1 ? "▲ Crossed above today" : fmtStreak(x.e[1])) : "Not enough history"}</td>
       <td class="${cls(x.st.r1)}">${fmtPct(x.st.r1)}</td>
       <td>${inIdx.has(x.sym) ? "Yes" : '<span class="tag">No</span>'}</td></tr>`).join("")}</tbody></table></div>`;
 }
 
 function renderEma() {
   if (!emaData) return;
-  document.querySelectorAll("#ema-show-seg button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.show === ema.show));
-  const { rows, universe, aboveCount, freshCount } = emaRows();
-  $("#ema-summary").innerHTML = `<b>${aboveCount}</b> of ${universe} micro sectors are above their ${ema.period}-day EMA · ` +
-    `<b>${freshCount}</b> crossed above in the last ${FRESH_DAYS} sessions · showing ${rows.length}`;
+  const { rows, universe, crossed } = emaRows();
+  const day = fmtDate(emaData.as_of) + (summary.provisional ? ` (${summary.snapshot_ist || "intraday"} IST snapshot)` : "");
+  $("#ema-summary").innerHTML = `<b>${crossed}</b> of ${universe} micro sectors crossed above their ${ema.period}-day EMA on ${day}` +
+    (rows.length !== crossed ? ` · showing ${rows.length}` : "");
   $("#ema-empty").hidden = rows.length > 0;
+  $("#ema-empty").textContent = crossed
+    ? "No micro sectors match the search or sector filter."
+    : `No micro sector crossed above its ${ema.period}-day EMA on ${day}. Try another EMA period.`;
   const q = ema.q.trim();
   $("#ema-list").innerHTML = rows.map((r) => {
     const open = ema.open.has(r.s.id) || (q && r.hits && r.hits.length);
@@ -561,7 +561,6 @@ function renderEma() {
       <summary>
         <div class="ema-name">${esc(r.s.name)}<div class="card-broad">${esc(r.s.broad_sector)} · ${r.s.constituents.length} stocks</div></div>
         <div class="metric"><span class="lbl">vs ${ema.period}-day EMA</span><span class="val ${cls(e.dist)}">${fmtPct(e.dist, 2)}</span></div>
-        <div class="metric m-streak"><span class="lbl">Streak</span><span class="val ${e.streak > 0 ? "pos" : "neg"}">${fmtStreak(e.streak)}</span></div>
         <div class="metric m-breadth"><span class="lbl">Stocks above EMA</span><span class="val">${e.total ? `${e.above} / ${e.total}` : "—"}</span>
           <div class="bar" aria-hidden="true"><i style="width:${e.breadth ?? 0}%"></i></div></div>
         <div class="metric m-r1"><span class="lbl">1D</span><span class="val ${cls(r.s.r1)}">${fmtPct(r.s.r1)}</span></div>
@@ -575,7 +574,8 @@ function renderEma() {
 
 let emaRowsById = new Map();
 function emaStocksBody(r) {
-  return `<div class="ema-stocks-head"><span>Members, sorted by distance from the ${ema.period}-day EMA</span>
+  const today = r.s.constituents.filter((sym) => { const x = emaData.stocks[sym]; return x && x.ema[ema.period] && x.ema[ema.period][1] === 1; }).length;
+  return `<div class="ema-stocks-head"><span>Members, sorted by distance from the ${ema.period}-day EMA · ${today} crossed above today</span>
     <button type="button" class="link-btn" data-chart="${r.s.id}">Open chart with EMA</button></div>${stockTable(r)}`;
 }
 
@@ -585,7 +585,6 @@ function wireEma() {
   sel.innerHTML = emaData.periods.map((p) => `<option value="${p}">${p}-day</option>`).join("");
   sel.value = ema.period;
   sel.addEventListener("change", () => { ema.period = sel.value; store.set("ema-period", ema.period); renderEma(); });
-  $("#ema-show-seg").addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; ema.show = b.dataset.show; store.set("ema-show", ema.show); renderEma(); });
   $("#ema-search").addEventListener("input", (e) => { ema.q = e.target.value; renderEma(); });
   $("#ema-broad").insertAdjacentHTML("beforeend", [...new Set(emaData.sectors.map((s) => s.broad_sector))].sort().map((b) => `<option>${esc(b)}</option>`).join(""));
   $("#ema-broad").addEventListener("change", (e) => { ema.broad = e.target.value; renderEma(); });

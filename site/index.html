@@ -94,17 +94,10 @@
         <label class="field">EMA
           <select id="ema-period" aria-label="EMA period"></select>
         </label>
-        <div class="seg" role="group" aria-label="Show" id="ema-show-seg">
-          <button type="button" data-show="above">Above EMA</button>
-          <button type="button" data-show="fresh">Just crossed above</button>
-          <button type="button" data-show="below">Below EMA</button>
-          <button type="button" data-show="all">All</button>
-        </div>
         <input type="search" id="ema-search" placeholder="Search micro sector or stock…" aria-label="Search micro sector or stock">
         <select id="ema-broad" aria-label="Broad sector"><option value="">All sectors</option></select>
         <select id="ema-sort" aria-label="Sort">
           <option value="dist">Distance from EMA</option>
-          <option value="streak">Days above EMA</option>
           <option value="breadth">% of stocks above EMA</option>
           <option value="r1">1D change</option>
           <option value="name">Name</option>
@@ -115,7 +108,7 @@
       <p class="ema-summary" id="ema-summary" aria-live="polite"></p>
       <main>
         <div id="ema-list" class="ema-list"></div>
-        <p class="empty" id="ema-empty" hidden>No micro sectors match.</p>
+        <p class="empty" id="ema-empty" hidden></p>
       </main>
     </section>
 
