@@ -15,3 +15,50 @@ THYROCARE,2020-11-14,drop_day,,Bad print on Diwali muhurat session (942.5 vs ~31
 CGCL,2024-01-01,adjust,0.25,Stock split 1:2 + bonus 1:1 not adjusted by Yahoo
 MOTILALOFS,2024-01-01,adjust,0.25,Bonus 3:1 not adjusted by Yahoo
 DHANBANK,2024-12-18,adjust,0.7741,Rights issue ex-date (close ratio; volume normal) - verify ratio
+SHARDAMOTR,2025-01-01,adjust,0.5,Bonus 1:1 not adjusted by Yahoo
+CONCOR,2025-01-01,adjust,0.8,Bonus 1:4 not adjusted by Yahoo
+TRENT,2026-01-01,adjust,0.6667,Bonus 1:2 not adjusted by Yahoo
+GPIL,2024-01-01,adjust,0.2,Stock split 1:5 not adjusted by Yahoo
+IRISDOREME,2025-07-01,adjust,0.5,Bonus 1:1 not adjusted by Yahoo
+AQYLON,2026-01-01,adjust,0.1,Stock split 1:10 not adjusted by Yahoo
+SILVERTUC,2023-01-02,adjust,0.1,Yahoo shows 2023 at 1/10 of true price: with the 2024-01-01 row this restores continuity
+SILVERTUC,2024-01-01,adjust,10.0,Undo Yahoo's 2023 mis-scaling (see 2023-01-02 row)
+SILVERTUC,2026-01-01,adjust,0.1,Stock split 1:10 not adjusted by Yahoo
+REDTAPE,2025-01-01,adjust,0.2518,Split/bonus not adjusted by Yahoo (close ratio)
+TAALTECH,2026-09-21,adjust,0.211,Split/bonus not adjusted by Yahoo (close ratio)
+JSLL,2025-06-03,adjust,0.2172,Split/bonus not adjusted by Yahoo (close ratio)
+INDIAGLYCO,2026-09-02,adjust,0.2125,Split/bonus not adjusted by Yahoo (close ratio) - verify
+KAPSTON,2026-03-02,adjust,0.6481,Bonus not adjusted by Yahoo (close ratio) - verify
+VIVIANA,2025-11-10,adjust,0.5943,Bonus not adjusted by Yahoo (close ratio) - verify
+BESTAGRO,2024-04-10,adjust,0.5965,Bonus not adjusted by Yahoo (close ratio) - verify
+GRAUWEIL,2026-04-20,adjust,0.5896,Split/bonus not adjusted by Yahoo (close ratio) - verify
+GENESYS,2026-07-27,adjust,0.6886,"Probable corporate action; volume normal, no reversal (close ratio) - verify"
+TRIVENI,2026-07-22,adjust,0.5843,Probable demerger/capital action (close ratio) - verify
+NIITLTD,2023-06-08,adjust,0.2387,Demerger of NIIT Learning Systems (close ratio)
+SHANKARA,2025-09-24,adjust,0.2446,Demerger of Shankara Buildpro (close ratio)
+RAYMOND,2024-07-11,adjust,0.6341,Demerger of Raymond Lifestyle (close ratio)
+RAYMOND,2025-05-14,adjust,0.3524,Demerger of Raymond Realty (close ratio)
+ALLCARGO,2023-04-18,adjust,0.7899,Demerger of Transindia Real Estate (close ratio)
+ALLCARGO,2025-11-12,adjust,0.3508,Demerger of international business (close ratio)
+QUESS,2025-04-15,adjust,0.493,Demerger of Digitide and Bluspring (close ratio)
+STLTECH,2025-04-24,adjust,0.748,Demerger of STL Networks (close ratio)
+SCI,2023-03-31,adjust,0.7758,Demerger of SCI Land & Assets (close ratio)
+ABFRL,2025-05-22,adjust,0.3341,Demerger of Aditya Birla Lifestyle Brands (close ratio)
+VEDL,2026-04-30,adjust,0.351,"Demerger into aluminium, oil & gas, power, iron & steel companies (close ratio)"
+TMPV,2025-10-14,adjust,0.5985,Demerger of commercial vehicles business (close ratio)
+SWANDEF,2025-01-21,drop_before,,Relisted after insolvency (formerly Reliance Naval); earlier prices not comparable
+WAAREEINDO,2025-06-19,drop_before,,Relisted after long suspension (formerly Indosolar)
+DOLPHIN,2023-08-21,drop_before,,Resumed trading after suspension; earlier quotes stale
+POCL,2023-03-06,drop_before,,Earlier quotes stale (zero volume)
+PVP,2021-07-22,drop_before,,Resumed trading after suspension; earlier quotes stale
+BCG,2025-07-14,drop_before,,Resumed trading after SEBI suspension; earlier quotes stale
+MARINE,2021-03-10,drop_before,,Migrated from SME platform; earlier quotes stale
+AQYLON,2024-04-02,drop_before,,Earlier quotes stale (zero volume)
+ORCHPHARMA,2020-11-03,drop_before,,Relisted after insolvency resolution
+SUMEETINDS,2025-06-19,drop_before,,Relisted after restructuring; earlier quotes stale or erratic
+TIL,2024-03-18,drop_before,,Price reset on restructuring (not a split); earlier prices not comparable
+TIL,2024-03-13,drop_day,,Bad print
+MBAPL,2020-11-14,drop_day,,Bad print on Diwali muhurat session
+INDIAMART,2020-11-14,drop_day,,Bad print on Diwali muhurat session
+AHLUCONT,2020-11-14,drop_day,,Bad print on Diwali muhurat session
+SOLEX,2024-09-04,drop_day,,Bad print

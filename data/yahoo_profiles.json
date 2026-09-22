@@ -5111,7 +5111,12 @@
 "yahoo_industry": "Packaged Foods",
 "yahoo_sector": "Consumer Defensive"
 },
-"LALITHAA": {},
+"LALITHAA": {
+"mcap_cr": 18812,
+"summary": "Lalithaa Jewellery Mart Limited designs, manufactures, and sells gold, silver, diamond. and other jewellery products under the Lalithaa brand name. The company offers a range of jewellery options, including necklaces, bangles, rings, earrings, pendants, bracelets, and chains for special occasions, festivals, wedding, daily wear, and personal occasions. It also offers precious and semi-precious jew",
+"yahoo_industry": "Luxury Goods",
+"yahoo_sector": "Consumer Cyclical"
+},
 "LALPATHLAB": {
 "mcap_cr": 32066,
 "summary": "Dr. Lal PathLabs Limited operates laboratories for carrying out pathological investigations in India and internationally. The company provides pathological investigations of various branches of bio-chemistry, hematology, histopathology, microbiology, electrophoresis, immuno-chemistry, immunology, virology, cytology, and other pathological and radiological investigations. It also offers phlebotomis",
@@ -5130,7 +5135,12 @@
 "yahoo_industry": "Furnishings, Fixtures & Appliances",
 "yahoo_sector": "Consumer Cyclical"
 },
-"LASERPOWER": {},
+"LASERPOWER": {
+"mcap_cr": 3861,
+"summary": "Laser Power & Infra Limited manufactures and distributes power cables, conductors, and other components for the power transmission and distribution industry in India and internationally. The company operates in 2 segments, manufacturing and EPC (engineering, procurement, and construction). The company's products include galvanized steel earth wire, aluminum alloy wire rods, MV aerial bunched cable",
+"yahoo_industry": "Electrical Equipment & Parts",
+"yahoo_sector": "Industrials"
+},
 "LATENTVIEW": {
 "mcap_cr": 5228,
 "summary": "Latent View Analytics Limited provides business analytics, consulting services, data engineering, generative AI, and digital solutions in India, the United States, the Netherlands, the United Kingdom, Singapore, Germany, the United Arab Emirates, Latam, Mexico, and internationally. It offers customer, HR, marketing, financial, supply chain, and risk and fraud analytics services, as well as revenue",

@@ -6,8 +6,9 @@ Methodology
   - Eligible at a rebalance: has a close that day, and 20-day median traded value
     (close x volume, measured up to the previous session) of at least ₹1 crore.
     New listings therefore join at the first rebalance after ~20 sessions of trading.
-  - A sector's index starts at the first rebalance with 3+ eligible stocks (base 100). If it later
-    drops below 3 it continues with whatever is eligible, and the count is reported.
+  - Every rebalance period of an index must have 3+ eligible stocks. The index (base 100) starts at
+    the beginning of the latest unbroken run of such rebalances; a sector whose latest rebalance
+    has fewer than 3 is not indexed until it recovers.
   - A stock with no close on a day is left out of that day's average (its weight is held until
     it trades again; its return is then measured from its last close).
 
@@ -68,22 +69,24 @@ def build_sector(
 
     levels = np.full(len(calendar), np.nan)
     history: list[dict] = []
-    level = None
     bounds = [pos[r] for r in rebals] + [len(calendar) - 1]
+    eligible_at = [np.where((liq[r_i] >= MIN_MEDIAN_TRADED_VALUE) & ~np.isnan(px[r_i]))[0] for r_i in bounds[:-1]]
 
-    for k, r_i in enumerate(bounds[:-1]):
-        eligible = np.where((liq[r_i] >= MIN_MEDIAN_TRADED_VALUE) & ~np.isnan(px[r_i]))[0]
-        if level is None:
-            if len(eligible) < MIN_CONSTITUENTS:
-                continue
-            level = BASE_VALUE
-            levels[r_i] = level
+    # Start at the latest unbroken run of rebalances that all meet the minimum, so every
+    # period of the published index has at least MIN_CONSTITUENTS stocks.
+    start_k = len(eligible_at)
+    while start_k > 0 and len(eligible_at[start_k - 1]) >= MIN_CONSTITUENTS:
+        start_k -= 1
+    if start_k == len(eligible_at):
+        return pd.Series(levels, index=calendar), history
+
+    level = BASE_VALUE
+    levels[bounds[start_k]] = level
+    for k in range(start_k, len(eligible_at)):
+        r_i, eligible = bounds[k], eligible_at[k]
         history.append({"date": str(calendar[r_i].date()), "constituents": [members[j] for j in eligible]})
 
         end_i = bounds[k + 1]
-        if len(eligible) == 0:
-            levels[r_i + 1 : end_i + 1] = level
-            continue
         weights = np.full(len(eligible), 1.0 / len(eligible))
         last = px[r_i, eligible].copy()
         for t in range(r_i + 1, end_i + 1):

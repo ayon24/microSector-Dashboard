@@ -4,7 +4,8 @@
     python -m pipeline.build_universe --refresh  # re-fetch all Yahoo profiles
 
 Liquidity uses the same rule as the indices: 20-session median traded value >= ₹1 crore,
-computed from NSE bhavcopy. Each stock gets its NSE sector (from the Nifty Total Market and
+computed from NSE bhavcopy. Only companies on NSE's main-board equity list (EQUITY_L) count, which
+excludes ETFs, liquid funds and SME-platform stocks. Each stock gets its NSE sector (from the Nifty Total Market and
 Microcap 250 constituent lists), its Yahoo sector/industry, market cap and business summary,
 and the micro sector(s) it already sits in, if any.
 
@@ -91,6 +92,9 @@ def yahoo_profile(symbol: str) -> dict:
 def run(refresh: bool = False) -> pd.DataFrame:
     liquid = liquid_symbols()
     names = _csv(EQUITY_LIST).set_index("SYMBOL")["NAME OF COMPANY"]
+    excluded = liquid.index.difference(names.index)
+    liquid = liquid.loc[liquid.index.intersection(names.index)]
+    log.info("Excluded %d liquid symbols not on the equity list (ETFs, funds, SME)", len(excluded))
     nse_sector = pd.concat([_csv(u) for u in NSE_SECTOR_LISTS]).drop_duplicates("Symbol").set_index("Symbol")["Industry"]
 
     cache = {} if refresh or not PROFILE_CACHE.exists() else json.loads(PROFILE_CACHE.read_text())

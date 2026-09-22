@@ -43,7 +43,7 @@ Individual steps: `python -m pipeline.fetch_prices [--full]`, `pipeline.validate
 - Equal weight, rebalanced at the close of the first trading day of Jan/Apr/Jul/Oct. Weights drift between rebalances.
 - To be eligible, a stock needs a 20-day median traded value of at least ₹1 crore, measured up to the prior session. New listings
   join at the next rebalance.
-- A micro sector needs 3 or more eligible stocks to get an index. The index starts at 100 on the first rebalance where that holds.
+- A micro sector needs 3 or more eligible stocks at every quarterly rebalance. The index starts at 100 at the beginning of its latest unbroken run of such quarters, so no published period rests on fewer than 3 stocks.
 - A stock with no price on a day is left out of that day's average.
 - The dashboard rebases every chart to 100 at the start of the selected timeframe.
 
