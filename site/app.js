@@ -27,7 +27,8 @@ let detailChart = null;
 // ---------- data ----------
 
 async function getJSON(url) {
-  const r = await fetch(url);
+  // GitHub Pages caches data files for 10 minutes; revalidate so a fresh update is never missed.
+  const r = await fetch(url, { cache: "no-cache" });
   if (!r.ok) throw new Error(`${url}: ${r.status}`);
   return r.json();
 }

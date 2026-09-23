@@ -2,7 +2,12 @@ name: Daily update
 
 on:
   schedule:
-    - cron: "30 9 * * 1-5"   # 15:00 IST, Mon–Fri (intraday snapshot; finalised by the next run)
+    # 15:00 IST on weekdays, then two backups. GitHub queues scheduled runs on shared capacity and
+    # drops or delays them under load (worst on the hour and half hour), so the primary time is
+    # off-peak and the backups do nothing once the day's snapshot has been published.
+    - cron: "27 9 * * 1-5"    # 14:57 IST - primary
+    - cron: "53 9 * * 1-5"    # 15:23 IST - backup
+    - cron: "23 10 * * 1-5"   # 15:53 IST - backup
   workflow_dispatch:
   push:
     branches: [main]
@@ -25,18 +30,41 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
+      # A backup run has nothing to do once today's data is already committed.
+      - name: Is today's data already published?
+        id: state
+        run: |
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import datetime, json, pathlib, zoneinfo
+          today = datetime.datetime.now(zoneinfo.ZoneInfo("Asia/Kolkata")).date().isoformat()
+          f = pathlib.Path("data/fetch_meta.json")
+          meta = json.loads(f.read_text()) if f.exists() else {}
+          done = meta.get("latest_date") == today
+          print(f"done={'true' if done else 'false'}")
+          print(f"latest={meta.get('latest_date')} today={today}")
+          PY
+          cat "$GITHUB_OUTPUT"
+
+      - name: Skip (already up to date)
+        if: github.event_name == 'schedule' && steps.state.outputs.done == 'true'
+        run: echo "Today's prices are already committed; nothing to do."
+
       - uses: actions/setup-python@v7
+        if: ${{ github.event_name != 'schedule' || steps.state.outputs.done != 'true' }}
         with:
           python-version: "3.12"
           cache: pip
 
       - run: pip install -r requirements.txt
+        if: ${{ github.event_name != 'schedule' || steps.state.outputs.done != 'true' }}
 
       - name: Fetch, validate, build, export
+        if: ${{ github.event_name != 'schedule' || steps.state.outputs.done != 'true' }}
         run: python -m pipeline.run_all
 
       - name: Commit new data
         id: commit
+        if: ${{ github.event_name != 'schedule' || steps.state.outputs.done != 'true' }}
         run: |
           git add data/prices.parquet data/validation_report.json data/fetch_meta.json site/data
           if git diff --cached --quiet; then
