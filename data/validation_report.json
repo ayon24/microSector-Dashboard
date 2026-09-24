@@ -1,5 +1,5 @@
 {
-  "latest_date": "2026-09-23",
+  "latest_date": "2026-09-24",
   "symbols_expected": 1522,
   "symbols_on_latest_date": 1522,
   "errors": [],
@@ -9,6 +9,11 @@
       "threshold": 0.2,
       "moves": [
         {
+          "symbol": "POLICYBZR",
+          "date": "2026-09-24",
+          "return": -0.2601
+        },
+        {
           "symbol": "TAALTECH",
           "date": "2026-09-21",
           "return": 4.0004
@@ -17,12 +22,77 @@
     },
     {
       "check": "bhavcopy_mismatch",
-      "date": "2026-09-22",
+      "date": "2026-09-23",
       "symbols": [
         {
-          "symbol": "GMDCLTD",
-          "ours": 554.15,
-          "nse": 563.65
+          "symbol": "AGL",
+          "ours": 14.39,
+          "nse": 14.22
+        },
+        {
+          "symbol": "ARIHANTCAP",
+          "ours": 95.35,
+          "nse": 94.06
+        },
+        {
+          "symbol": "AURIONPRO",
+          "ours": 698.95,
+          "nse": 689.4
+        },
+        {
+          "symbol": "CRAFTSMAN",
+          "ours": 10668.0,
+          "nse": 10904.0
+        },
+        {
+          "symbol": "DJML",
+          "ours": 71.8,
+          "nse": 72.7
+        },
+        {
+          "symbol": "EMBDL",
+          "ours": 60.6,
+          "nse": 61.22
+        },
+        {
+          "symbol": "GAUDIUMIVF",
+          "ours": 118.92,
+          "nse": 117.69
+        },
+        {
+          "symbol": "GPTHEALTH",
+          "ours": 163.5,
+          "nse": 161.5
+        },
+        {
+          "symbol": "HESTERBIO",
+          "ours": 2217.5,
+          "nse": 2241.8
+        },
+        {
+          "symbol": "IMFA",
+          "ours": 1279.0,
+          "nse": 1266.1
+        },
+        {
+          "symbol": "INFOBEAN",
+          "ours": 153.5,
+          "nse": 151.81
+        },
+        {
+          "symbol": "JAGSNPHARM",
+          "ours": 227.9,
+          "nse": 225.63
+        },
+        {
+          "symbol": "MMP",
+          "ours": 470.0,
+          "nse": 464.8
+        },
+        {
+          "symbol": "PARKHOTELS",
+          "ours": 107.58,
+          "nse": 106.29
         }
       ]
     }
