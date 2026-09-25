@@ -1,5 +1,5 @@
 {
-  "latest_date": "2026-09-24",
+  "latest_date": "2026-09-25",
   "symbols_expected": 1522,
   "symbols_on_latest_date": 1522,
   "errors": [],
@@ -11,7 +11,7 @@
         {
           "symbol": "POLICYBZR",
           "date": "2026-09-24",
-          "return": -0.2601
+          "return": -0.36
         },
         {
           "symbol": "TAALTECH",
@@ -22,77 +22,1717 @@
     },
     {
       "check": "bhavcopy_mismatch",
-      "date": "2026-09-23",
+      "date": "2026-09-24",
       "symbols": [
         {
-          "symbol": "AGL",
-          "ours": 14.39,
-          "nse": 14.22
+          "symbol": "ACSTECH",
+          "ours": 76.0,
+          "nse": 80.37
+        },
+        {
+          "symbol": "ADFFOODS",
+          "ours": 267.05,
+          "nse": 271.65
+        },
+        {
+          "symbol": "ADOR",
+          "ours": 1643.9,
+          "nse": 1612.9
+        },
+        {
+          "symbol": "ADVANCE",
+          "ours": 119.98,
+          "nse": 118.67
+        },
+        {
+          "symbol": "ADVENZYMES",
+          "ours": 298.55,
+          "nse": 292.75
+        },
+        {
+          "symbol": "AFFLE",
+          "ours": 1562.2,
+          "nse": 1588.1
+        },
+        {
+          "symbol": "AGARIND",
+          "ours": 404.5,
+          "nse": 400.05
+        },
+        {
+          "symbol": "AGIIL",
+          "ours": 268.5,
+          "nse": 271.45
+        },
+        {
+          "symbol": "AIAENG",
+          "ours": 4020.1,
+          "nse": 3953.4
+        },
+        {
+          "symbol": "AJAXENGG",
+          "ours": 569.3,
+          "nse": 575.2
+        },
+        {
+          "symbol": "ALIVUS",
+          "ours": 1384.8,
+          "nse": 1370.0
+        },
+        {
+          "symbol": "AMBER",
+          "ours": 7005.0,
+          "nse": 6911.0
+        },
+        {
+          "symbol": "AMRUTANJAN",
+          "ours": 518.8,
+          "nse": 510.2
+        },
+        {
+          "symbol": "ANDHRSUGAR",
+          "ours": 94.07,
+          "nse": 92.98
+        },
+        {
+          "symbol": "ANUP",
+          "ours": 1689.4,
+          "nse": 1670.1
+        },
+        {
+          "symbol": "APEX",
+          "ours": 357.95,
+          "nse": 348.9
+        },
+        {
+          "symbol": "APOLLOPIPE",
+          "ours": 518.0,
+          "nse": 510.5
+        },
+        {
+          "symbol": "AQYLON",
+          "ours": 18.69,
+          "nse": 18.99
+        },
+        {
+          "symbol": "ARIES",
+          "ours": 472.0,
+          "nse": 466.9
         },
         {
           "symbol": "ARIHANTCAP",
-          "ours": 95.35,
-          "nse": 94.06
+          "ours": 93.62,
+          "nse": 91.95
+        },
+        {
+          "symbol": "ARMANFIN",
+          "ours": 1923.5,
+          "nse": 1897.5
+        },
+        {
+          "symbol": "ARVINDFASN",
+          "ours": 419.65,
+          "nse": 414.25
+        },
+        {
+          "symbol": "ARVSMART",
+          "ours": 629.8,
+          "nse": 622.75
+        },
+        {
+          "symbol": "ASKAUTOLTD",
+          "ours": 650.45,
+          "nse": 642.75
+        },
+        {
+          "symbol": "AUGMONT",
+          "ours": 886.95,
+          "nse": 864.1
         },
         {
           "symbol": "AURIONPRO",
-          "ours": 698.95,
-          "nse": 689.4
+          "ours": 694.85,
+          "nse": 682.55
+        },
+        {
+          "symbol": "AUROPHARMA",
+          "ours": 1733.8,
+          "nse": 1716.0
+        },
+        {
+          "symbol": "AUTOIND",
+          "ours": 85.19,
+          "nse": 84.32
+        },
+        {
+          "symbol": "AVALON",
+          "ours": 2419.1,
+          "nse": 2316.1
+        },
+        {
+          "symbol": "AXISCADES",
+          "ours": 1946.3,
+          "nse": 1923.1
+        },
+        {
+          "symbol": "AYE",
+          "ours": 176.24,
+          "nse": 171.99
+        },
+        {
+          "symbol": "BAJAJELEC",
+          "ours": 325.0,
+          "nse": 321.45
+        },
+        {
+          "symbol": "BALKRISIND",
+          "ours": 2195.4,
+          "nse": 2167.8
+        },
+        {
+          "symbol": "BANCOINDIA",
+          "ours": 609.9,
+          "nse": 602.35
+        },
+        {
+          "symbol": "BELRISE",
+          "ours": 248.88,
+          "nse": 243.63
+        },
+        {
+          "symbol": "BHAGERIA",
+          "ours": 340.5,
+          "nse": 359.65
+        },
+        {
+          "symbol": "BHAGYANGR",
+          "ours": 445.1,
+          "nse": 432.3
+        },
+        {
+          "symbol": "BHARATWIRE",
+          "ours": 168.48,
+          "nse": 165.34
+        },
+        {
+          "symbol": "BIKAJI",
+          "ours": 583.1,
+          "nse": 575.2
+        },
+        {
+          "symbol": "BIL",
+          "ours": 1028.65,
+          "nse": 1010.25
+        },
+        {
+          "symbol": "BIRLANU",
+          "ours": 1400.0,
+          "nse": 1421.3
+        },
+        {
+          "symbol": "BIRLAPREC",
+          "ours": 57.05,
+          "nse": 56.47
+        },
+        {
+          "symbol": "BLUEJET",
+          "ours": 586.35,
+          "nse": 573.45
+        },
+        {
+          "symbol": "BLUSPRING",
+          "ours": 134.75,
+          "nse": 140.56
+        },
+        {
+          "symbol": "BOSCH-HCIL",
+          "ours": 1766.0,
+          "nse": 1730.0
+        },
+        {
+          "symbol": "CANFINHOME",
+          "ours": 751.85,
+          "nse": 743.15
+        },
+        {
+          "symbol": "CARTRADE",
+          "ours": 3035.0,
+          "nse": 3004.8
+        },
+        {
+          "symbol": "CENTENKA",
+          "ours": 575.0,
+          "nse": 567.55
+        },
+        {
+          "symbol": "CENTURYPLY",
+          "ours": 713.05,
+          "nse": 694.25
+        },
+        {
+          "symbol": "CEWATER",
+          "ours": 272.55,
+          "nse": 268.75
+        },
+        {
+          "symbol": "CHALET",
+          "ours": 877.25,
+          "nse": 894.9
+        },
+        {
+          "symbol": "CMRGREEN",
+          "ours": 223.86,
+          "nse": 220.72
+        },
+        {
+          "symbol": "CNL",
+          "ours": 1135.9,
+          "nse": 1106.9
+        },
+        {
+          "symbol": "COLPAL",
+          "ours": 1876.2,
+          "nse": 1854.8
+        },
+        {
+          "symbol": "COMSYN",
+          "ours": 300.45,
+          "nse": 292.5
+        },
+        {
+          "symbol": "CONFIPET",
+          "ours": 88.57,
+          "nse": 86.29
+        },
+        {
+          "symbol": "CORDELIA",
+          "ours": 109.74,
+          "nse": 107.97
+        },
+        {
+          "symbol": "COSMOFIRST",
+          "ours": 866.2,
+          "nse": 857.25
         },
         {
           "symbol": "CRAFTSMAN",
-          "ours": 10668.0,
-          "nse": 10904.0
+          "ours": 10967.0,
+          "nse": 10710.0
+        },
+        {
+          "symbol": "CSM",
+          "ours": 103.1,
+          "nse": 101.57
+        },
+        {
+          "symbol": "CUB",
+          "ours": 227.13,
+          "nse": 220.52
+        },
+        {
+          "symbol": "CYIENT",
+          "ours": 1069.2,
+          "nse": 1057.8
+        },
+        {
+          "symbol": "CYIENTDLM",
+          "ours": 934.5,
+          "nse": 912.7
+        },
+        {
+          "symbol": "DALMIASUG",
+          "ours": 403.75,
+          "nse": 399.5
+        },
+        {
+          "symbol": "DCAL",
+          "ours": 171.73,
+          "nse": 168.19
+        },
+        {
+          "symbol": "DCI",
+          "ours": 283.2,
+          "nse": 302.4
+        },
+        {
+          "symbol": "DECCANCE",
+          "ours": 563.5,
+          "nse": 555.95
+        },
+        {
+          "symbol": "DECNGOLD",
+          "ours": 217.3,
+          "nse": 214.51
+        },
+        {
+          "symbol": "DIACABS",
+          "ours": 370.0,
+          "nse": 360.45
+        },
+        {
+          "symbol": "DIAMONDYD",
+          "ours": 1084.8,
+          "nse": 1065.3
+        },
+        {
+          "symbol": "DIFFNKG",
+          "ours": 438.1,
+          "nse": 427.25
+        },
+        {
+          "symbol": "DIGITIDE",
+          "ours": 80.8,
+          "nse": 79.76
+        },
+        {
+          "symbol": "DIVGIITTS",
+          "ours": 1175.8,
+          "nse": 1156.6
         },
         {
           "symbol": "DJML",
-          "ours": 71.8,
-          "nse": 72.7
+          "ours": 73.51,
+          "nse": 74.44
+        },
+        {
+          "symbol": "DMCC",
+          "ours": 302.4,
+          "nse": 295.05
+        },
+        {
+          "symbol": "DOLPHIN",
+          "ours": 694.55,
+          "nse": 685.3
+        },
+        {
+          "symbol": "DPABHUSHAN",
+          "ours": 1429.9,
+          "nse": 1405.6
+        },
+        {
+          "symbol": "DWARKESH",
+          "ours": 41.19,
+          "nse": 40.74
+        },
+        {
+          "symbol": "DYCL",
+          "ours": 478.45,
+          "nse": 473.2
+        },
+        {
+          "symbol": "EFCIL",
+          "ours": 179.16,
+          "nse": 181.2
+        },
+        {
+          "symbol": "EIMCOELECO",
+          "ours": 2275.4,
+          "nse": 2304.4
+        },
+        {
+          "symbol": "ELANTAS",
+          "ours": 14157.0,
+          "nse": 13849.0
+        },
+        {
+          "symbol": "ELECON",
+          "ours": 467.25,
+          "nse": 459.1
+        },
+        {
+          "symbol": "ELECTHERM",
+          "ours": 905.9,
+          "nse": 887.7
+        },
+        {
+          "symbol": "ELGIEQUIP",
+          "ours": 616.2,
+          "nse": 608.8
         },
         {
           "symbol": "EMBDL",
-          "ours": 60.6,
-          "nse": 61.22
+          "ours": 59.63,
+          "nse": 58.81
         },
         {
-          "symbol": "GAUDIUMIVF",
-          "ours": 118.92,
-          "nse": 117.69
+          "symbol": "EPACKPEB",
+          "ours": 255.28,
+          "nse": 246.29
         },
         {
-          "symbol": "GPTHEALTH",
-          "ours": 163.5,
-          "nse": 161.5
+          "symbol": "ESAFSFB",
+          "ours": 39.89,
+          "nse": 40.82
         },
         {
-          "symbol": "HESTERBIO",
-          "ours": 2217.5,
-          "nse": 2241.8
+          "symbol": "FISCHER",
+          "ours": 34.78,
+          "nse": 34.23
         },
         {
-          "symbol": "IMFA",
-          "ours": 1279.0,
-          "nse": 1266.1
+          "symbol": "FOSECOIND",
+          "ours": 6552.0,
+          "nse": 6477.0
         },
         {
-          "symbol": "INFOBEAN",
-          "ours": 153.5,
-          "nse": 151.81
+          "symbol": "GALLANTT",
+          "ours": 553.1,
+          "nse": 545.25
         },
         {
-          "symbol": "JAGSNPHARM",
-          "ours": 227.9,
-          "nse": 225.63
+          "symbol": "GANECOS",
+          "ours": 1046.2,
+          "nse": 1014.0
         },
         {
-          "symbol": "MMP",
-          "ours": 470.0,
-          "nse": 464.8
+          "symbol": "GEMAROMA",
+          "ours": 153.03,
+          "nse": 155.18
         },
         {
-          "symbol": "PARKHOTELS",
-          "ours": 107.58,
-          "nse": 106.29
+          "symbol": "GENCON",
+          "ours": 39.29,
+          "nse": 38.65
+        },
+        {
+          "symbol": "GENUSPOWER",
+          "ours": 313.25,
+          "nse": 306.6
+        },
+        {
+          "symbol": "GHCLTEXTIL",
+          "ours": 136.85,
+          "nse": 135.34
+        },
+        {
+          "symbol": "GIPCL",
+          "ours": 188.48,
+          "nse": 186.42
+        },
+        {
+          "symbol": "GKSL",
+          "ours": 177.51,
+          "nse": 170.85
+        },
+        {
+          "symbol": "GLAXO",
+          "ours": 2874.0,
+          "nse": 2829.2
+        },
+        {
+          "symbol": "GOCOLORS",
+          "ours": 312.65,
+          "nse": 318.35
+        },
+        {
+          "symbol": "GOODLUCK",
+          "ours": 536.9,
+          "nse": 530.45
+        },
+        {
+          "symbol": "GOPAL",
+          "ours": 258.0,
+          "nse": 262.55
+        },
+        {
+          "symbol": "GPTINFRA",
+          "ours": 114.94,
+          "nse": 113.52
+        },
+        {
+          "symbol": "GRAUWEIL",
+          "ours": 84.23,
+          "nse": 86.69
+        },
+        {
+          "symbol": "GREENPLY",
+          "ours": 298.8,
+          "nse": 294.3
+        },
+        {
+          "symbol": "GRINDWELL",
+          "ours": 2024.5,
+          "nse": 1981.0
+        },
+        {
+          "symbol": "GUFICBIO",
+          "ours": 431.7,
+          "nse": 422.0
+        },
+        {
+          "symbol": "GUJTHEM",
+          "ours": 418.5,
+          "nse": 410.45
+        },
+        {
+          "symbol": "GULFOILLUB",
+          "ours": 1077.1,
+          "nse": 1090.8
+        },
+        {
+          "symbol": "GVPIL",
+          "ours": 673.1,
+          "nse": 659.4
+        },
+        {
+          "symbol": "GVT&D",
+          "ours": 4391.9,
+          "nse": 4286.3
+        },
+        {
+          "symbol": "HAPPSTMNDS",
+          "ours": 314.75,
+          "nse": 311.6
+        },
+        {
+          "symbol": "HGINFRA",
+          "ours": 446.5,
+          "nse": 468.05
+        },
+        {
+          "symbol": "HINDWAREAP",
+          "ours": 173.01,
+          "nse": 170.31
+        },
+        {
+          "symbol": "HINDZINC",
+          "ours": 593.8,
+          "nse": 587.15
+        },
+        {
+          "symbol": "HIRECT",
+          "ours": 1234.3,
+          "nse": 1219.0
+        },
+        {
+          "symbol": "HLEGLAS",
+          "ours": 438.1,
+          "nse": 428.75
+        },
+        {
+          "symbol": "HOMEFIRST",
+          "ours": 1174.2,
+          "nse": 1157.5
+        },
+        {
+          "symbol": "HUBTOWN",
+          "ours": 175.51,
+          "nse": 173.38
+        },
+        {
+          "symbol": "HYUNDAI",
+          "ours": 2091.6,
+          "nse": 2060.6
+        },
+        {
+          "symbol": "ICRA",
+          "ours": 4489.0,
+          "nse": 4442.7
+        },
+        {
+          "symbol": "IGARASHI",
+          "ours": 425.15,
+          "nse": 418.35
+        },
+        {
+          "symbol": "IGPL",
+          "ours": 597.35,
+          "nse": 586.4
+        },
+        {
+          "symbol": "IIFL",
+          "ours": 624.8,
+          "nse": 617.55
+        },
+        {
+          "symbol": "IITL",
+          "ours": 139.21,
+          "nse": 143.27
+        },
+        {
+          "symbol": "INDGN",
+          "ours": 605.95,
+          "nse": 594.1
+        },
+        {
+          "symbol": "INDIACEM",
+          "ours": 334.55,
+          "nse": 330.1
+        },
+        {
+          "symbol": "INDIAGLYCO",
+          "ours": 297.9,
+          "nse": 306.0
+        },
+        {
+          "symbol": "INDIANHUME",
+          "ours": 365.6,
+          "nse": 361.5
+        },
+        {
+          "symbol": "INDIGOPNTS",
+          "ours": 1137.0,
+          "nse": 1117.8
+        },
+        {
+          "symbol": "INDNIPPON",
+          "ours": 1276.9,
+          "nse": 1315.9
+        },
+        {
+          "symbol": "INDOBORAX",
+          "ours": 458.8,
+          "nse": 452.45
+        },
+        {
+          "symbol": "INDOSTAR",
+          "ours": 220.22,
+          "nse": 217.95
+        },
+        {
+          "symbol": "INDOTECH",
+          "ours": 3282.8,
+          "nse": 3190.1
+        },
+        {
+          "symbol": "INNOVACAP",
+          "ours": 1313.8,
+          "nse": 1295.3
+        },
+        {
+          "symbol": "INOXINDIA",
+          "ours": 2124.0,
+          "nse": 2064.8
+        },
+        {
+          "symbol": "IONEXCHANG",
+          "ours": 425.8,
+          "nse": 420.55
+        },
+        {
+          "symbol": "ISFT",
+          "ours": 103.82,
+          "nse": 102.14
+        },
+        {
+          "symbol": "IVALUE",
+          "ours": 239.86,
+          "nse": 234.43
+        },
+        {
+          "symbol": "JAYKAY",
+          "ours": 205.95,
+          "nse": 202.53
+        },
+        {
+          "symbol": "JKCEMENT",
+          "ours": 5103.5,
+          "nse": 5184.5
+        },
+        {
+          "symbol": "JNKINDIA",
+          "ours": 427.75,
+          "nse": 422.45
+        },
+        {
+          "symbol": "JSL",
+          "ours": 752.65,
+          "nse": 738.95
+        },
+        {
+          "symbol": "JSLL",
+          "ours": 517.8,
+          "nse": 511.15
+        },
+        {
+          "symbol": "JSWENERGY",
+          "ours": 516.1,
+          "nse": 510.0
+        },
+        {
+          "symbol": "JUBLINGREA",
+          "ours": 644.7,
+          "nse": 635.35
+        },
+        {
+          "symbol": "JUBLPHARMA",
+          "ours": 1052.75,
+          "nse": 1063.85
+        },
+        {
+          "symbol": "JUSTDIAL",
+          "ours": 682.95,
+          "nse": 672.35
+        },
+        {
+          "symbol": "KAVDEFENCE",
+          "ours": 86.46,
+          "nse": 83.0
+        },
+        {
+          "symbol": "KERNEX",
+          "ours": 1730.8,
+          "nse": 1700.8
+        },
+        {
+          "symbol": "KINGFA",
+          "ours": 6418.0,
+          "nse": 6228.5
+        },
+        {
+          "symbol": "KIRLOSENG",
+          "ours": 2197.1,
+          "nse": 2164.5
+        },
+        {
+          "symbol": "KKCL",
+          "ours": 475.0,
+          "nse": 469.3
+        },
+        {
+          "symbol": "KMEW",
+          "ours": 2974.6,
+          "nse": 2890.6
+        },
+        {
+          "symbol": "KOLTEPATIL",
+          "ours": 437.3,
+          "nse": 432.05
+        },
+        {
+          "symbol": "KOPRAN",
+          "ours": 278.97,
+          "nse": 270.81
+        },
+        {
+          "symbol": "KPRMILL",
+          "ours": 1135.4,
+          "nse": 1113.8
+        },
+        {
+          "symbol": "KRBL",
+          "ours": 405.65,
+          "nse": 398.2
+        },
+        {
+          "symbol": "KRISHANA",
+          "ours": 186.62,
+          "nse": 184.51
+        },
+        {
+          "symbol": "KRISHNADEF",
+          "ours": 1028.0,
+          "nse": 1015.5
+        },
+        {
+          "symbol": "KUSUMGAR",
+          "ours": 611.35,
+          "nse": 620.1
+        },
+        {
+          "symbol": "LANDMARK",
+          "ours": 496.3,
+          "nse": 489.05
+        },
+        {
+          "symbol": "LAOPALA",
+          "ours": 162.61,
+          "nse": 160.21
+        },
+        {
+          "symbol": "LASERPOWER",
+          "ours": 279.55,
+          "nse": 274.5
+        },
+        {
+          "symbol": "LAXMIDENTL",
+          "ours": 200.21,
+          "nse": 197.05
+        },
+        {
+          "symbol": "LAXMIINDIA",
+          "ours": 123.46,
+          "nse": 120.66
+        },
+        {
+          "symbol": "LCL",
+          "ours": 582.45,
+          "nse": 575.55
+        },
+        {
+          "symbol": "LENSKART",
+          "ours": 687.0,
+          "nse": 676.0
+        },
+        {
+          "symbol": "LOKESHMACH",
+          "ours": 349.7,
+          "nse": 342.9
+        },
+        {
+          "symbol": "LUMAXTECH",
+          "ours": 2090.0,
+          "nse": 2068.8
+        },
+        {
+          "symbol": "MACPOWER",
+          "ours": 2125.2,
+          "nse": 2061.1
+        },
+        {
+          "symbol": "MANALIPETC",
+          "ours": 84.79,
+          "nse": 83.28
+        },
+        {
+          "symbol": "MANAPPURAM",
+          "ours": 319.85,
+          "nse": 324.95
+        },
+        {
+          "symbol": "MANCREDIT",
+          "ours": 226.19,
+          "nse": 222.52
+        },
+        {
+          "symbol": "MAPMYINDIA",
+          "ours": 896.5,
+          "nse": 882.8
+        },
+        {
+          "symbol": "MARATHON",
+          "ours": 417.15,
+          "nse": 410.8
+        },
+        {
+          "symbol": "MARSONS",
+          "ours": 128.14,
+          "nse": 124.37
+        },
+        {
+          "symbol": "MAWANASUG",
+          "ours": 133.7,
+          "nse": 130.7
+        },
+        {
+          "symbol": "MAXESTATES",
+          "ours": 633.95,
+          "nse": 616.8
+        },
+        {
+          "symbol": "MBAPL",
+          "ours": 166.02,
+          "nse": 164.07
+        },
+        {
+          "symbol": "MCLEODRUSS",
+          "ours": 46.75,
+          "nse": 44.84
+        },
+        {
+          "symbol": "MEDICAMEQ",
+          "ours": 311.25,
+          "nse": 306.5
+        },
+        {
+          "symbol": "MMFL",
+          "ours": 619.65,
+          "nse": 612.75
+        },
+        {
+          "symbol": "MONTECARLO",
+          "ours": 525.35,
+          "nse": 516.5
+        },
+        {
+          "symbol": "MOTILALOFS",
+          "ours": 1038.0,
+          "nse": 1022.0
+        },
+        {
+          "symbol": "MTARTECH",
+          "ours": 7241.0,
+          "nse": 7050.0
+        },
+        {
+          "symbol": "MUKKA",
+          "ours": 27.39,
+          "nse": 27.04
+        },
+        {
+          "symbol": "NDRAUTO",
+          "ours": 768.35,
+          "nse": 754.2
+        },
+        {
+          "symbol": "NGLFINE",
+          "ours": 2826.5,
+          "nse": 2894.9
+        },
+        {
+          "symbol": "NIBE",
+          "ours": 1315.0,
+          "nse": 1297.2
+        },
+        {
+          "symbol": "NILASPACES",
+          "ours": 11.79,
+          "nse": 11.43
+        },
+        {
+          "symbol": "NILKAMAL",
+          "ours": 1903.0,
+          "nse": 1883.7
+        },
+        {
+          "symbol": "NITCO",
+          "ours": 91.12,
+          "nse": 90.03
+        },
+        {
+          "symbol": "NITINSPIN",
+          "ours": 615.1,
+          "nse": 605.55
+        },
+        {
+          "symbol": "NOVARTIND",
+          "ours": 1993.2,
+          "nse": 1971.4
+        },
+        {
+          "symbol": "NPST",
+          "ours": 1828.6,
+          "nse": 1782.3
+        },
+        {
+          "symbol": "NRL",
+          "ours": 167.2,
+          "nse": 165.0
+        },
+        {
+          "symbol": "NUVOCO",
+          "ours": 339.4,
+          "nse": 335.0
+        },
+        {
+          "symbol": "NYKAA",
+          "ours": 342.25,
+          "nse": 335.3
+        },
+        {
+          "symbol": "OAL",
+          "ours": 543.0,
+          "nse": 532.3
+        },
+        {
+          "symbol": "OBEROIRLTY",
+          "ours": 1859.9,
+          "nse": 1837.5
+        },
+        {
+          "symbol": "OLECTRA",
+          "ours": 1256.7,
+          "nse": 1244.0
+        },
+        {
+          "symbol": "OMPOWER",
+          "ours": 168.2,
+          "nse": 166.03
+        },
+        {
+          "symbol": "ONIDA",
+          "ours": 34.05,
+          "nse": 33.28
+        },
+        {
+          "symbol": "ORIENTCEM",
+          "ours": 124.0,
+          "nse": 122.32
+        },
+        {
+          "symbol": "ORIENTHOT",
+          "ours": 143.0,
+          "nse": 140.41
+        },
+        {
+          "symbol": "ORIRAIL",
+          "ours": 126.8,
+          "nse": 125.17
+        },
+        {
+          "symbol": "ORISSAMINE",
+          "ours": 3762.0,
+          "nse": 3716.9
+        },
+        {
+          "symbol": "PACEDIGITK",
+          "ours": 165.65,
+          "nse": 167.36
+        },
+        {
+          "symbol": "PAISALO",
+          "ours": 90.65,
+          "nse": 89.45
+        },
+        {
+          "symbol": "PANACEABIO",
+          "ours": 379.85,
+          "nse": 374.75
+        },
+        {
+          "symbol": "PARACABLES",
+          "ours": 60.86,
+          "nse": 60.15
+        },
+        {
+          "symbol": "PAUSHAKLTD",
+          "ours": 676.75,
+          "nse": 669.85
+        },
+        {
+          "symbol": "PCBL",
+          "ours": 343.2,
+          "nse": 338.6
+        },
+        {
+          "symbol": "PERNIASPOP",
+          "ours": 540.75,
+          "nse": 530.4
+        },
+        {
+          "symbol": "PHOENIXLTD",
+          "ours": 2009.0,
+          "nse": 1955.0
+        },
+        {
+          "symbol": "PICCADIL",
+          "ours": 609.2,
+          "nse": 601.55
+        },
+        {
+          "symbol": "PIDILITIND",
+          "ours": 1550.1,
+          "nse": 1522.0
+        },
+        {
+          "symbol": "PNCINFRA",
+          "ours": 138.59,
+          "nse": 136.72
+        },
+        {
+          "symbol": "PNGJL",
+          "ours": 601.8,
+          "nse": 591.2
+        },
+        {
+          "symbol": "PNGSREVA",
+          "ours": 515.6,
+          "nse": 523.85
+        },
+        {
+          "symbol": "POCL",
+          "ours": 481.1,
+          "nse": 468.85
+        },
+        {
+          "symbol": "PRABHA",
+          "ours": 231.49,
+          "nse": 225.76
+        },
+        {
+          "symbol": "PRECAM",
+          "ours": 121.4,
+          "nse": 119.99
+        },
+        {
+          "symbol": "PRECWIRE",
+          "ours": 498.5,
+          "nse": 488.9
+        },
+        {
+          "symbol": "PRIORITY",
+          "ours": 300.5,
+          "nse": 303.99
+        },
+        {
+          "symbol": "PROSTARM",
+          "ours": 142.28,
+          "nse": 139.26
+        },
+        {
+          "symbol": "PROZONER",
+          "ours": 52.74,
+          "nse": 54.16
+        },
+        {
+          "symbol": "PSPPROJECT",
+          "ours": 817.5,
+          "nse": 802.6
+        },
+        {
+          "symbol": "QUADFUTURE",
+          "ours": 511.5,
+          "nse": 500.4
+        },
+        {
+          "symbol": "RAINBOW",
+          "ours": 1386.4,
+          "nse": 1412.6
+        },
+        {
+          "symbol": "RAJRATAN",
+          "ours": 477.75,
+          "nse": 472.05
+        },
+        {
+          "symbol": "RAMBHAJO",
+          "ours": 279.82,
+          "nse": 275.76
+        },
+        {
+          "symbol": "RATEGAIN",
+          "ours": 844.45,
+          "nse": 824.0
+        },
+        {
+          "symbol": "RBZJEWEL",
+          "ours": 175.48,
+          "nse": 172.26
+        },
+        {
+          "symbol": "RELAXO",
+          "ours": 296.05,
+          "nse": 291.7
+        },
+        {
+          "symbol": "RESPONIND",
+          "ours": 161.37,
+          "nse": 158.02
+        },
+        {
+          "symbol": "RITCO",
+          "ours": 289.5,
+          "nse": 286.1
+        },
+        {
+          "symbol": "ROSSTECH",
+          "ours": 1440.3,
+          "nse": 1418.9
+        },
+        {
+          "symbol": "RPGLIFE",
+          "ours": 2945.5,
+          "nse": 2899.9
+        },
+        {
+          "symbol": "RSL",
+          "ours": 185.98,
+          "nse": 181.92
+        },
+        {
+          "symbol": "RTNINDIA",
+          "ours": 27.15,
+          "nse": 26.57
+        },
+        {
+          "symbol": "RUPA",
+          "ours": 137.58,
+          "nse": 136.0
+        },
+        {
+          "symbol": "SAATVIKGL",
+          "ours": 447.0,
+          "nse": 437.95
+        },
+        {
+          "symbol": "SAMBHV",
+          "ours": 155.25,
+          "nse": 152.36
+        },
+        {
+          "symbol": "SANGAMIND",
+          "ours": 585.75,
+          "nse": 579.7
+        },
+        {
+          "symbol": "SANOFICONR",
+          "ours": 4052.0,
+          "nse": 3971.3
+        },
+        {
+          "symbol": "SAPPHIRE",
+          "ours": 228.12,
+          "nse": 225.7
+        },
+        {
+          "symbol": "SARDAEN",
+          "ours": 506.35,
+          "nse": 499.45
+        },
+        {
+          "symbol": "SASKEN",
+          "ours": 1763.3,
+          "nse": 1736.8
+        },
+        {
+          "symbol": "SATIN",
+          "ours": 223.75,
+          "nse": 226.15
+        },
+        {
+          "symbol": "SBC",
+          "ours": 49.05,
+          "nse": 48.01
+        },
+        {
+          "symbol": "SCHAEFFLER",
+          "ours": 4075.7,
+          "nse": 4024.2
+        },
+        {
+          "symbol": "SENORES",
+          "ours": 1363.3,
+          "nse": 1344.3
+        },
+        {
+          "symbol": "SETL",
+          "ours": 410.0,
+          "nse": 402.8
+        },
+        {
+          "symbol": "SGMART",
+          "ours": 725.65,
+          "nse": 717.15
+        },
+        {
+          "symbol": "SGRL",
+          "ours": 736.75,
+          "nse": 677.15
+        },
+        {
+          "symbol": "SHAILY",
+          "ours": 3153.4,
+          "nse": 3112.1
+        },
+        {
+          "symbol": "SHALBY",
+          "ours": 146.57,
+          "nse": 143.77
+        },
+        {
+          "symbol": "SHALPAINTS",
+          "ours": 79.37,
+          "nse": 76.65
+        },
+        {
+          "symbol": "SHANKARA",
+          "ours": 138.9,
+          "nse": 137.18
+        },
+        {
+          "symbol": "SHANTIGEAR",
+          "ours": 673.4,
+          "nse": 666.25
+        },
+        {
+          "symbol": "SHILCTECH",
+          "ours": 4152.7,
+          "nse": 4079.1
+        },
+        {
+          "symbol": "SHILPAMED",
+          "ours": 1034.5,
+          "nse": 1007.3
+        },
+        {
+          "symbol": "SHIVALIK",
+          "ours": 422.0,
+          "nse": 410.7
+        },
+        {
+          "symbol": "SHK",
+          "ours": 143.0,
+          "nse": 140.96
+        },
+        {
+          "symbol": "SHREEPUSHK",
+          "ours": 485.45,
+          "nse": 492.15
+        },
+        {
+          "symbol": "SHRIPISTON",
+          "ours": 4649.8,
+          "nse": 4526.7
+        },
+        {
+          "symbol": "SIGMAADV",
+          "ours": 971.0,
+          "nse": 949.65
+        },
+        {
+          "symbol": "SIGNPOST",
+          "ours": 276.8,
+          "nse": 272.8
+        },
+        {
+          "symbol": "SILVERTUC",
+          "ours": 150.99,
+          "nse": 147.51
+        },
+        {
+          "symbol": "SIMPLEXINF",
+          "ours": 254.4,
+          "nse": 251.75
+        },
+        {
+          "symbol": "SINDHUTRAD",
+          "ours": 23.95,
+          "nse": 23.66
+        },
+        {
+          "symbol": "SIS",
+          "ours": 423.2,
+          "nse": 418.45
+        },
+        {
+          "symbol": "SJS",
+          "ours": 2294.5,
+          "nse": 2261.4
+        },
+        {
+          "symbol": "SOLARA",
+          "ours": 738.05,
+          "nse": 727.35
+        },
+        {
+          "symbol": "SOLARWORLD",
+          "ours": 136.62,
+          "nse": 133.89
+        },
+        {
+          "symbol": "SOUTHWEST",
+          "ours": 191.14,
+          "nse": 188.76
+        },
+        {
+          "symbol": "SPECTRUM",
+          "ours": 3279.0,
+          "nse": 3356.3
+        },
+        {
+          "symbol": "SPIC",
+          "ours": 66.58,
+          "nse": 65.86
+        },
+        {
+          "symbol": "STAR",
+          "ours": 1225.2,
+          "nse": 1202.8
+        },
+        {
+          "symbol": "STEELXIND",
+          "ours": 11.71,
+          "nse": 11.43
+        },
+        {
+          "symbol": "STYL",
+          "ours": 354.1,
+          "nse": 370.35
+        },
+        {
+          "symbol": "STYLAMIND",
+          "ours": 3363.8,
+          "nse": 3319.2
+        },
+        {
+          "symbol": "STYLEBAAZA",
+          "ours": 374.45,
+          "nse": 370.4
+        },
+        {
+          "symbol": "SUDARSCHEM",
+          "ours": 1241.2,
+          "nse": 1218.0
+        },
+        {
+          "symbol": "SUMICHEM",
+          "ours": 458.35,
+          "nse": 449.7
+        },
+        {
+          "symbol": "SUNDRMFAST",
+          "ours": 1185.5,
+          "nse": 1172.3
+        },
+        {
+          "symbol": "SUNSHINE",
+          "ours": 442.5,
+          "nse": 436.9
+        },
+        {
+          "symbol": "SUNTECK",
+          "ours": 287.4,
+          "nse": 284.05
+        },
+        {
+          "symbol": "SUPREMEIND",
+          "ours": 3473.5,
+          "nse": 3434.0
+        },
+        {
+          "symbol": "SUPRIYA",
+          "ours": 981.2,
+          "nse": 961.75
+        },
+        {
+          "symbol": "SURAJEST",
+          "ours": 223.4,
+          "nse": 219.42
+        },
+        {
+          "symbol": "SWANDEF",
+          "ours": 2768.1,
+          "nse": 2716.6
+        },
+        {
+          "symbol": "SYRMA",
+          "ours": 1719.9,
+          "nse": 1698.6
+        },
+        {
+          "symbol": "TAALTECH",
+          "ours": 1098.6,
+          "nse": 1050.5
+        },
+        {
+          "symbol": "TAJGVK",
+          "ours": 327.3,
+          "nse": 323.2
+        },
+        {
+          "symbol": "TARIL",
+          "ours": 284.2,
+          "nse": 280.4
+        },
+        {
+          "symbol": "TASTYBITE",
+          "ours": 10261.0,
+          "nse": 9903.0
+        },
+        {
+          "symbol": "TATVA",
+          "ours": 1771.1,
+          "nse": 1728.6
+        },
+        {
+          "symbol": "TCIEXP",
+          "ours": 500.3,
+          "nse": 492.75
+        },
+        {
+          "symbol": "TCPLPACK",
+          "ours": 4100.3,
+          "nse": 4058.8
+        },
+        {
+          "symbol": "TDPOWERSYS",
+          "ours": 753.95,
+          "nse": 742.0
+        },
+        {
+          "symbol": "TEGA",
+          "ours": 2089.0,
+          "nse": 2062.0
+        },
+        {
+          "symbol": "TEMBO",
+          "ours": 60.38,
+          "nse": 59.26
+        },
+        {
+          "symbol": "TEXINFRA",
+          "ours": 122.52,
+          "nse": 118.9
+        },
+        {
+          "symbol": "THANGAMAYL",
+          "ours": 5191.0,
+          "nse": 5097.0
+        },
+        {
+          "symbol": "THEMISMED",
+          "ours": 119.92,
+          "nse": 118.1
+        },
+        {
+          "symbol": "TIIL",
+          "ours": 3067.2,
+          "nse": 3033.1
+        },
+        {
+          "symbol": "TIMKEN",
+          "ours": 3293.7,
+          "nse": 3256.9
+        },
+        {
+          "symbol": "TINNARUBR",
+          "ours": 1000.45,
+          "nse": 982.8
+        },
+        {
+          "symbol": "TIPSMUSIC",
+          "ours": 671.55,
+          "nse": 662.05
+        },
+        {
+          "symbol": "TMB",
+          "ours": 906.6,
+          "nse": 893.55
+        },
+        {
+          "symbol": "TNPETRO",
+          "ours": 129.18,
+          "nse": 126.98
+        },
+        {
+          "symbol": "TNPL",
+          "ours": 144.25,
+          "nse": 148.94
+        },
+        {
+          "symbol": "TRITURBINE",
+          "ours": 558.25,
+          "nse": 551.8
+        },
+        {
+          "symbol": "TTKPRESTIG",
+          "ours": 525.7,
+          "nse": 515.3
+        },
+        {
+          "symbol": "TVSHLTD",
+          "ours": 12333.0,
+          "nse": 12501.0
+        },
+        {
+          "symbol": "TVSSCS",
+          "ours": 132.13,
+          "nse": 130.47
+        },
+        {
+          "symbol": "UFLEX",
+          "ours": 671.25,
+          "nse": 661.55
+        },
+        {
+          "symbol": "ULTRACEMCO",
+          "ours": 11185.0,
+          "nse": 11056.0
+        },
+        {
+          "symbol": "ULTRAMAR",
+          "ours": 435.95,
+          "nse": 429.05
+        },
+        {
+          "symbol": "UNIMECH",
+          "ours": 1733.3,
+          "nse": 1692.3
+        },
+        {
+          "symbol": "UNIPARTS",
+          "ours": 861.4,
+          "nse": 850.35
+        },
+        {
+          "symbol": "UNITECH",
+          "ours": 4.13,
+          "nse": 4.05
+        },
+        {
+          "symbol": "URBANCO",
+          "ours": 173.1,
+          "nse": 171.26
+        },
+        {
+          "symbol": "UTTAMSUGAR",
+          "ours": 263.9,
+          "nse": 260.0
+        },
+        {
+          "symbol": "VAIBHAVGBL",
+          "ours": 207.45,
+          "nse": 205.25
+        },
+        {
+          "symbol": "VENUSREM",
+          "ours": 1659.9,
+          "nse": 1624.8
+        },
+        {
+          "symbol": "VISHNU",
+          "ours": 715.4,
+          "nse": 703.25
+        },
+        {
+          "symbol": "VIVIANA",
+          "ours": 719.9,
+          "nse": 706.25
+        },
+        {
+          "symbol": "VOEPL",
+          "ours": 507.05,
+          "nse": 497.65
+        },
+        {
+          "symbol": "VSTTILLERS",
+          "ours": 4438.3,
+          "nse": 4516.7
+        },
+        {
+          "symbol": "WAKEFIT",
+          "ours": 144.81,
+          "nse": 142.83
+        },
+        {
+          "symbol": "WANBURY",
+          "ours": 232.3,
+          "nse": 225.15
+        },
+        {
+          "symbol": "WEL",
+          "ours": 75.17,
+          "nse": 74.18
+        },
+        {
+          "symbol": "WELSPLSOL",
+          "ours": 54.7,
+          "nse": 53.46
+        },
+        {
+          "symbol": "WESTLIFE",
+          "ours": 585.3,
+          "nse": 569.25
+        },
+        {
+          "symbol": "XPROINDIA",
+          "ours": 1230.0,
+          "nse": 1207.0
+        },
+        {
+          "symbol": "YASHO",
+          "ours": 4165.0,
+          "nse": 4043.7
+        },
+        {
+          "symbol": "ZEEMEDIA",
+          "ours": 7.48,
+          "nse": 7.4
+        },
+        {
+          "symbol": "ZUARI",
+          "ours": 222.06,
+          "nse": 218.41
         }
       ]
     }
