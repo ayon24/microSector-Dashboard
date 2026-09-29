@@ -1,5 +1,5 @@
 {
-  "latest_date": "2026-09-28",
+  "latest_date": "2026-09-29",
   "symbols_expected": 1522,
   "symbols_on_latest_date": 1522,
   "errors": [],
@@ -17,17 +17,6 @@
           "symbol": "TAALTECH",
           "date": "2026-09-21",
           "return": 4.0004
-        }
-      ]
-    },
-    {
-      "check": "bhavcopy_mismatch",
-      "date": "2026-09-25",
-      "symbols": [
-        {
-          "symbol": "AASTHA",
-          "ours": 36.36,
-          "nse": 72.72
         }
       ]
     }
