@@ -1,5 +1,5 @@
 {
-  "latest_date": "2026-10-07",
+  "latest_date": "2026-10-08",
   "symbols_expected": 1522,
   "symbols_on_latest_date": 1522,
   "errors": [],
@@ -8,6 +8,11 @@
       "check": "big_moves",
       "threshold": 0.2,
       "moves": [
+        {
+          "symbol": "BHAGYANGR",
+          "date": "2026-10-08",
+          "return": -0.9089
+        },
         {
           "symbol": "POLICYBZR",
           "date": "2026-09-24",
