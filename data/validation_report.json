@@ -1,5 +1,5 @@
 {
-  "latest_date": "2026-10-13",
+  "latest_date": "2026-10-14",
   "symbols_expected": 1522,
   "symbols_on_latest_date": 1521,
   "errors": [],
@@ -8,11 +8,6 @@
       "check": "big_moves",
       "threshold": 0.2,
       "moves": [
-        {
-          "symbol": "ADVANCE",
-          "date": "2026-10-13",
-          "return": 0.271
-        },
         {
           "symbol": "BHAGYANGR",
           "date": "2026-10-08",
@@ -24,19 +19,9 @@
           "return": -0.36
         },
         {
-          "symbol": "SHRINGARMS",
-          "date": "2026-10-13",
-          "return": 0.4057
-        },
-        {
           "symbol": "TAALTECH",
           "date": "2026-09-21",
           "return": 4.0004
-        },
-        {
-          "symbol": "UTTAMSUGAR",
-          "date": "2026-10-13",
-          "return": 0.2553
         },
         {
           "symbol": "VERANDA",
