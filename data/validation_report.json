@@ -1,7 +1,7 @@
 {
-  "latest_date": "2026-11-06",
+  "latest_date": "2026-11-09",
   "symbols_expected": 1522,
-  "symbols_on_latest_date": 1520,
+  "symbols_on_latest_date": 1522,
   "errors": [],
   "warnings": [
     {
@@ -17,6 +17,11 @@
           "symbol": "BHAGYANGR",
           "date": "2026-10-08",
           "return": -0.9089
+        },
+        {
+          "symbol": "KPEL",
+          "date": "2026-11-09",
+          "return": 0.2288
         },
         {
           "symbol": "POLICYBZR",
